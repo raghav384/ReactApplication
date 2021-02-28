@@ -1,0 +1,166 @@
+.container {
+	margin-left: 50px;
+	width: 100%;
+	
+}
+
+.heading {
+	font-size: 30px;
+	padding: 16px 0;
+	color: #444;
+	text-align: center;
+}
+
+.search-label {
+	position: relative;
+}
+
+
+.results-container {
+	display: flex;
+	flex-flow: wrap;
+}
+
+.result-item {
+	position: relative;
+	padding: 16px;
+	border: 1px solid #898989;
+	margin: 16px;
+	text-align: center;
+	min-width: 200px;
+	box-shadow: 2px 2px 2px #898989;
+}
+
+.image-username {
+	color: #ff7f50;
+	font-size: 18px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	margin: 0;
+	background-color: rgba( 0 ,0 ,0 , 0.8 );
+	padding: 5px 10px;
+}
+
+.image-wrapper {
+	display: flex;
+	justify-content: center;
+	align-self: center;
+	box-sizing: border-box;
+	height: 100%;
+
+}
+
+.image {
+	width: 100%;
+	height: 200px;
+}
+
+.search-loading {
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+.show {
+	display: inline-block;
+}
+
+.hide {
+	display: none;
+}
+
+.nav-link-container {
+	margin: 20px 0;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.nav-link {
+	color: #555;
+	text-decoration: none;
+	border: 1px solid #898989;
+	padding: 10px 20px;
+	margin-right: 10px;
+}
+
+.greyed-out {
+	background: #f1f1f1;
+	opacity: 0.5;
+}
+
+.card{
+margin-left: 85px;	
+ width: 800px;
+}
+
+.grid-container {
+	display: grid;
+	grid-template-columns: 20% 60% 10%;
+	grid-gap: 10px 10px;
+	background-color: rgb(255, 255, 255);
+	padding: 30px;
+	margin-left: 20px;
+  }
+  
+.grid-container > div {
+	background-color: rgb(255,255,255);
+	font-size: 30px;
+}
+  
+.Description{
+	grid-column-start: 2;
+	grid-column-end: 4;
+  }
+
+.SearchBar{
+	grid-column-start: 1;
+	grid-column-end: 3;
+}
+.Vendors{
+	grid-column-start: 1;
+	grid-column-end: 4;
+	padding: 15px;
+
+}
+.left-align{
+	text-align: left;
+}
+.searchbar-style{
+	background-color: white;
+	background-image: url('./searchicon.png');
+	background-position: 10px 10px;
+	background-repeat: no-repeat;
+	padding-left: 40px;
+	width:100%;
+	font-size: 16px;
+	font-style: italic;
+	color: rgb(185, 185, 19);
+	box-sizing: border-box;
+	outline: none;
+	height: 100%;
+  }
+
+  .button-style {
+	background-color: #4CAF50; /* Green */
+	border: 40px;
+	color: white;
+	width:100%;
+	height: 100%;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	cursor: pointer;
+  }
+  
+  .img-style{
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		width: 120px;
+		height:60px
+  }
+.vendor_table_styling td{
+	padding: 5px 5px 5px 5px;
+}
