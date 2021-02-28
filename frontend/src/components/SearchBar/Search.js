@@ -1,8 +1,9 @@
 import './Search.css';
 import axios from 'axios';
-import Loader from '../loader.gif';
+import Loader from './loader.gif';
 import {Component, Fragment} from 'react';
-
+import pharmeasy from './VendorsLogo/pharmeasy.png'
+import mg from './VendorsLogo/1mg.png'
 
 class Search extends Component {
 
@@ -15,21 +16,11 @@ class Search extends Component {
 			loading: false,
 			message: '',
 		};
-
-		this.cancel = '';
 	}
 
 	fetchSearchResults = (query) => {
 		const searchUrl = `http://localhost:8000/api/getdata/`+query;
-		if (this.cancel) {
-			this.cancel.cancel();
-		}
-
-		this.cancel = axios.CancelToken.source();
-
-		axios.get(searchUrl, {
-			cancelToken: this.cancel.token
-		})
+		axios.get(searchUrl)
 			.then(res => {
 				this.setState({
 					results: res.data,
@@ -37,7 +28,7 @@ class Search extends Component {
 				})
 			})
 			.catch(error => {
-				if (axios.isCancel(error) || error) {
+				if (error) {
 					this.setState({
 						loading: false,
 						message: 'Failed to fetch the data. Please check network'
@@ -51,16 +42,10 @@ class Search extends Component {
 		this.setState({ query: query_value, message: '' });
 	};
 
-	searchAPI = (event) => {
-		const query = this.state.query;
-		this.fetchSearchResults(query);
-	};
-
 	renderSearchResults = () => {
 		
 		let results = Array.from(this.state.results);
-		results = results.slice(1,5);
-		console.log(results);
+		results = results.slice(1,5);    /*Displaying only Records*/
 		const search_result = results.map((result, index) => {
 			return (
 				<div className="card" >
@@ -82,32 +67,45 @@ class Search extends Component {
 	
 	};
 
-handleKeyPress(e) {
-	if (e.key === 'Enter') {
-		this.searchAPI();
-	}
-}
+Search(){
+	const query = this.state.query;
+	this.fetchSearchResults(query);
+};
+
 render() {
 	const { query, loading, message } = this.state;
 
 	return (
-		<div className="container">
-			{/*	Heading*/}
-			<h2 className="heading">Search for Medicines for comparison</h2>
-			{/* Search Input*/}
-			<label className="search-label" htmlFor="search-input">
-				<input
-					type="text"
-					name="query"
-					value={query}
-					id="search-input"
-					placeholder="Enter the medicine name and press enter..."
-					onChange={this.handleOnInputChange}
-					onKeyUp={this.handleKeyPress.bind(this)}
-				/>
-				<i className="fa fa-search search-icon" aria-hidden="true" />
-			</label>
-
+		<div class="container">
+			<div class="grid-container">
+				<div class="healthScrollLogo"></div>
+				<div class="Description">
+					<h1>Deals of medicine from various pharmacies All in one place !!!</h1>
+					<h3 class="left-align">Try searching for a medicine</h3>
+				</div>
+				<div class="SearchBar">
+						<input
+							type="text"
+							class="searchbar-style"
+							name="query"
+							value={query}
+							id="search-input"
+							placeholder="Enter the medicine name to compare price"
+							onChange={this.handleOnInputChange}
+					/>
+				</div>
+				<div class="SearchButton">
+					<button onClick={this.Search.bind(this)} class="button-style">Search</button>
+				</div>
+				<div class="Vendors">
+					<table class="vendor_table_styling">
+						<tr>
+							<td><img class="img-style" src={pharmeasy}></img></td>
+							<td><img class="img-style" src={mg}></img></td>
+						</tr>
+					</table>
+				</div>
+			</div>
 			{/*	Error Message*/}
 			{message && <p className="message">{message}</p>}
 
