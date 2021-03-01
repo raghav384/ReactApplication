@@ -5,6 +5,10 @@ import {Component, Fragment} from 'react';
 import pharmeasy from './VendorsLogo/pharmeasy.png'
 import mg from './VendorsLogo/1mg.png'
 import logo from './HealthScroll_Logo.PNG'
+import Demo from '../CardDesign/Card'
+import '../CardDesign/Box.css';
+import { Card } from "react-bootstrap";
+import React from "react";
 
 class Search extends Component {
 
@@ -44,28 +48,37 @@ class Search extends Component {
 	};
 
 	renderSearchResults = () => {
-		
-		let results = Array.from(this.state.results);
-		results = results.slice(1,5);    /*Displaying only Records*/
-		const search_result = results.map((result, index) => {
-			return (
-				<div className="card" >
-					<div className="card-body">
-						<h1 className="card-title">{result._id.medicine_name}</h1>
-						<h2 className="card-text">Medicine_Vendor : {result._id.vendor_name} </h2>
-						<h2 className="card-text">Manufacturer: {result.medicine_manufacturer} </h2>
-						<h4 className="card-text">Price = {result.medicine_price} </h4>
-						<h5 className="card-text"><a href= {result.medicine_url}>Site URL </a> </h5>
-					</div>
-				</div>
-			)
-		})
-		return(
-			<div className = "col">
-				{search_result}
-    		</div>
-		  )
 	
+
+		let results = Array.from(this.state.results);
+		results = results.slice(1,5);
+		console.log(results);
+
+		//return <DemoUsinGBootStrapGrid dataToPass = {results} />
+
+		const renderCard = (card, index) => {
+			return (
+			  <Card style={{ width: "18rem" }} key={index} className="box">
+			  <Demo dataToPass = {card}  />
+			  </Card>
+			);
+		  };
+		
+		return <div className="grid">{results.map(renderCard)}</div>;
+
+		//const search_result = results.map((result, index) => {
+		// // 	return (
+		// 		<Card dataToPass = {result}  />
+		// 	)
+		// })
+		// return(
+		// 	<div className = "col">
+		// 		{search_result}
+
+
+    	// 	</div>
+		//   )
+
 	};
 
 Search(){
