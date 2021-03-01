@@ -4,6 +4,7 @@ import Loader from './loader.gif';
 import {Component, Fragment} from 'react';
 import pharmeasy from './VendorsLogo/pharmeasy.png'
 import mg from './VendorsLogo/1mg.png'
+import logo from './HealthScroll_Logo.PNG'
 
 class Search extends Component {
 
@@ -78,7 +79,9 @@ render() {
 	return (
 		<div class="container">
 			<div class="grid-container">
-				<div class="healthScrollLogo"></div>
+				<div class="healthScrollLogo">
+					<img class="logo-style" src ={logo}></img>
+				</div>
 				<div class="Description">
 					<h1>Deals of medicine from various pharmacies All in one place !!!</h1>
 					<h3 class="left-align">Try searching for a medicine</h3>
