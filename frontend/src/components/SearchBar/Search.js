@@ -9,6 +9,8 @@ import Demo from '../CardDesign/Card'
 import '../CardDesign/Box.css';
 import { Card } from "react-bootstrap";
 import React from "react";
+import Pagination from '../Pagination/Pagination';
+import '../Pagination/Pagination.css';
 
 class Search extends Component {
 
@@ -20,8 +22,23 @@ class Search extends Component {
 			results: {},
 			loading: false,
 			message: '',
+			currentPageResults: [],
+    		currentPage: null,
+    		totalPages: null
 		};
 	}
+
+
+	onPageChanged = data => {
+		const { results } = this.state;
+		let tempArr = Array.from(results);
+		const { currentPage, totalPages, pageLimit } = data;
+	
+		const offset = (currentPage - 1) * pageLimit;
+		const currentPageResults = tempArr.slice(offset, offset + pageLimit);
+	
+		this.setState({ currentPage, currentPageResults, totalPages });
+	};
 
 	fetchSearchResults = (query) => {
 		const searchUrl = `http://localhost:8000/api/getdata/`+query;
@@ -48,36 +65,93 @@ class Search extends Component {
 	};
 
 	renderSearchResults = () => {
-	
+		const {
+			results,
+			currentPageResults,
+			currentPage,
+			totalPages
+		  } = this.state;
+		  let tempRes = Array.from(results);
+		  const totalCountries = tempRes.length;
+		  if (totalCountries === 0) return <h2> No Results Found</h2>;
+	  
+		  const headerClass = [
+			"text-dark py-2 pr-4 m-0",
+			currentPage ? "border-gray border-right" : ""
+		  ]
+			.join(" ")
+			.trim();
 
-		let results = Array.from(this.state.results);
-		results = results.slice(1,5);
-		console.log(results);
+			
+	  const renderCard = (card, index) => {
+		  return (
+			<Card style={{ width: "18rem" }} key={index} className="box">
+			<Demo dataToPass = {card}  />
+			</Card>
+		  );
+		};
 
-		//return <DemoUsinGBootStrapGrid dataToPass = {results} />
-
-		const renderCard = (card, index) => {
-			return (
-			  <Card style={{ width: "18rem" }} key={index} className="box">
-			  <Demo dataToPass = {card}  />
-			  </Card>
-			);
-		  };
+	  	
+	  const createPage  = (totalCountries) => {
+		return (
+			<Pagination
+				totalRecords={totalCountries}
+				pageLimit={20}
+				pageNeighbours={1}
+				onPageChanged={this.onPageChanged}
+			  />
+		);
+	  };
+		  return (
+			<div className="container mb-5">
+			  <div className="row d-flex flex-row py-5">
+				<div className="w-100 px-4 py-5 d-flex flex-row flex-wrap align-items-center justify-content-between">
+				  <div className="d-flex flex-row align-items-center">
+					<h2 className={headerClass}>
+					  <strong className="text-secondary">{totalCountries}</strong>{" "}
+					  Results
+					</h2>
+					{currentPage && (
+					  <span className="current-page d-inline-block h-100 pl-4 text-secondary">
+						Page <span className="font-weight-bold">{currentPage}</span> /{" "}
+						<span className="font-weight-bold">{totalPages}</span>
+					  </span>
+					)}
+				  </div>
+				  <div className="d-flex flex-row py-4 align-items-center">
+					{createPage(totalCountries)}
+				  </div>
+				</div>
+				
+			  </div>
+			  <div className="grid">{currentPageResults.map(renderCard)}</div>
+			</div>
+			
+		  );
 		
-		return <div className="grid">{results.map(renderCard)}</div>;
-
-		//const search_result = results.map((result, index) => {
-		// // 	return (
-		// 		<Card dataToPass = {result}  />
-		// 	)
-		// })
-		// return(
-		// 	<div className = "col">
-		// 		{search_result}
 
 
-    	// 	</div>
-		//   )
+
+	  // let results = Array.from(this.state.results);
+	  // results = results.slice(1,5);
+	  // console.log(results);
+
+	  //return <DemoUsinGBootStrapGrid dataToPass = {results} />
+
+	  //return <div className="grid">{results.map(renderCard)}</div>;
+
+	  //const search_result = results.map((result, index) => {
+	  // // 	return (
+	  // 		<Card dataToPass = {result}  />
+	  // 	)
+	  // })
+	  // return(
+	  // 	<div className = "col">
+	  // 		{search_result}
+
+
+	  // 	</div>
+	  //   )	
 
 	};
 
@@ -93,7 +167,7 @@ render() {
 		<div class="container">
 			<div class="grid-container">
 				<div class="healthScrollLogo">
-					<img class="logo-style" src ={logo}></img>
+					<img class="logo-style" alt="" src ={logo}></img>
 				</div>
 				<div class="Description">
 					<h1>Deals of medicine from various pharmacies All in one place !!!</h1>
@@ -116,8 +190,8 @@ render() {
 				<div class="Vendors">
 					<table class="vendor_table_styling">
 						<tr>
-							<td><img class="img-style" src={pharmeasy}></img></td>
-							<td><img class="img-style" src={mg}></img></td>
+							<td><img class="img-style" alt="" src={pharmeasy}></img></td>
+							<td><img class="img-style" alt="" src={mg}></img></td>
 						</tr>
 					</table>
 				</div>
