@@ -15,7 +15,6 @@ const Navbar = () => {
       <Nav>
         <NavLink to='/'>
           <img src = {logo} style = {{width: "100px" , height: "80px"}}/>
-          <h1></h1>
         </NavLink>
         <Bars />
         <NavMenu>
