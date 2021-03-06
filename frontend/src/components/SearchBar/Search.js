@@ -24,7 +24,10 @@ class Search extends Component {
 			message: '',
 			currentPageResults: [],
     		currentPage: null,
-    		totalPages: null
+    		totalPages: null,
+			renderRequired : 0,
+			newObject : false
+
 		};
 	}
 
@@ -35,18 +38,30 @@ class Search extends Component {
 		const { currentPage, totalPages, pageLimit } = data;
 	
 		const offset = (currentPage - 1) * pageLimit;
-		const currentPageResults = tempArr.slice(offset, offset + pageLimit);
-	
-		this.setState({ currentPage, currentPageResults, totalPages });
+		const currentPageResults = tempArr.slice(offset, offset + pageLimit);       	
+		this.setState({ currentPage, currentPageResults, totalPages});
+		
 	};
+
 
 	fetchSearchResults = (query) => {
 		const searchUrl = `http://localhost:8000/api/getdata/`+query;
 		axios.get(searchUrl)
 			.then(res => {
+				
+				const totalPages = Math.ceil(res.data.length / 20);
+    			const currentPage = Math.max(0, Math.min(1, totalPages)); 
+    		    let tempArr = Array.from(res.data);
+				const offset = (currentPage - 1) * 20;
+				const currentPageResults = tempArr.slice(offset, offset + 20);
+
+
 				this.setState({
 					results: res.data,
-					loading: false
+					loading: false,
+					currentPage : currentPage,
+					currentPageResults : currentPageResults,
+					totalPages : totalPages
 				})
 			})
 			.catch(error => {
@@ -65,16 +80,19 @@ class Search extends Component {
 	};
 
 	renderSearchResults = () => {
+		console.log(this.state.newObject,this.state.renderRequired)
 		const {
 			results,
 			currentPageResults,
 			currentPage,
-			totalPages
+			totalPages,
+			renderRequired,
+			newObject
 		  } = this.state;
 		  let tempRes = Array.from(results);
 		  const totalCountries = tempRes.length;
 		  if (totalCountries === 0) return <h2> No Results Found</h2>;
-	  
+          console.log(results,currentPageResults,currentPage,totalPages)	  
 		  const headerClass = [
 			"text-dark py-2 pr-4 m-0",
 			currentPage ? "border-gray border-right" : ""
@@ -91,18 +109,8 @@ class Search extends Component {
 		  );
 		};
 
-	  	
-	  const createPage  = (totalCountries) => {
-		return (
-			<Pagination
-				totalRecords={totalCountries}
-				pageLimit={20}
-				pageNeighbours={1}
-				onPageChanged={this.onPageChanged}
-			  />
-		);
-	  };
 		  return (
+
 			<div className="container mb-5">
 			  <div className="row d-flex flex-row py-5">
 				<div className="w-100 px-4 py-5 d-flex flex-row flex-wrap align-items-center justify-content-between">
@@ -119,7 +127,14 @@ class Search extends Component {
 					)}
 				  </div>
 				  <div className="d-flex flex-row py-4 align-items-center">
-					{createPage(totalCountries)}
+				  <Pagination
+				newObject={newObject}  
+				renderAgain={renderRequired}  
+				totalRecords={totalCountries}
+				pageLimit={20}
+				pageNeighbours={1}
+				onPageChanged={this.onPageChanged}
+			  />
 				  </div>
 				</div>
 				

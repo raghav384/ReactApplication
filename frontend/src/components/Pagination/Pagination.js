@@ -32,14 +32,20 @@ class Pagination extends Component {
 
     
     this.state = { currentPage: 1,
-        totalPages : Math.ceil(this.totalRecords / this.pageLimit) 
+        totalPages : Math.ceil(this.totalRecords / this.pageLimit),
+        newObject : false 
     };
   }
+  static getDerivedStateFromProps(props, state) {
+    return {totalPages : Math.ceil(props.totalRecords / props.pageLimit), newObject : props.newObject};
+  }
 
+  
   componentDidMount() {
     this.gotoPage(1);
   }
-
+  
+  
   gotoPage = page => {
     const { onPageChanged = f => f } = this.props;
 
@@ -114,8 +120,11 @@ class Pagination extends Component {
 
     return range(1, totalPages);
   };
-
+  
   render() {
+    
+    
+
     if (!this.totalRecords) return null;
 
     if (this.state.totalPages === 1) return null;
@@ -183,7 +192,8 @@ Pagination.propTypes = {
   totalRecords: PropTypes.number.isRequired,
   pageLimit: PropTypes.number,
   pageNeighbours: PropTypes.number,
-  onPageChanged: PropTypes.func
+  onPageChanged: PropTypes.func,
+  renderAgain:PropTypes.number
 };
 
 export default Pagination;
