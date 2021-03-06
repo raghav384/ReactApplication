@@ -8,9 +8,9 @@ import {
   Container,
   Col
 } from "react-bootstrap";
-import "./navbar.css";
+import "./oldnavbar.css";
 
-class NavBar extends React.Component {
+class oldNavBar extends React.Component {
   render() {
     const { toggle } = this.props;
 
@@ -67,4 +67,4 @@ class NavBar extends React.Component {
     );
   }
 }
-export default NavBar;
+export default oldNavBar;
