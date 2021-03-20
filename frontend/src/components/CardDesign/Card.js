@@ -79,7 +79,7 @@ export default function RecipeReviewCard(props) {
           </Grid>
           <Grid item>
             <Typography gutterBottom variant="h6">
-              {props.dataToPass.price_offered}
+              {props.dataToPass.medicine_price}
             </Typography>
           </Grid>
         </Grid>
@@ -112,7 +112,7 @@ export default function RecipeReviewCard(props) {
         <CardContent>
           
           <Typography paragraph>
-            Description : {props.dataToPass.medicine_composition}
+            Description : {props.dataToPass.medicine_composition}         
           </Typography>
         
         </CardContent>
