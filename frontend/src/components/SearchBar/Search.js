@@ -90,9 +90,9 @@ class Search extends Component {
 			newObject
 		  } = this.state;
 		  let tempRes = Array.from(results);
-		  const totalCountries = tempRes.length;
-		  if (totalCountries === 0) return <h2> No Results Found</h2>;
-          console.log(results,currentPageResults,currentPage,totalPages)	  
+		  const totalRecords = tempRes.length;
+		  if ( totalRecords === 0) return <h2> No Results Found</h2>;
+          //console.log(results,currentPageResults,currentPage,totalPages)	  
 		  const headerClass = [
 			"text-dark py-2 pr-4 m-0",
 			currentPage ? "border-gray border-right" : ""
@@ -116,7 +116,7 @@ class Search extends Component {
 				<div className="w-100 px-4 py-5 d-flex flex-row flex-wrap align-items-center justify-content-between">
 				  <div className="d-flex flex-row align-items-center">
 					<h2 className={headerClass}>
-					  <strong className="text-secondary">{totalCountries}</strong>{" "}
+					  <strong className="text-secondary">{totalRecords}</strong>{" "}
 					  Results
 					</h2>
 					{currentPage && (
@@ -130,7 +130,7 @@ class Search extends Component {
 				  <Pagination
 				newObject={newObject}  
 				renderAgain={renderRequired}  
-				totalRecords={totalCountries}
+				totalRecords={totalRecords}
 				pageLimit={20}
 				pageNeighbours={1}
 				onPageChanged={this.onPageChanged}
