@@ -1,11 +1,17 @@
-var express = require("express");  
 var bodyParser = require('body-parser');   
 var morgan = require("morgan");  
 var mongoose = require('mongoose');
 var cors = require('cors');
 var request = require('request');
 const axios = require('axios');
-var app = express();
+const express = require('express')
+const path = require('path')
+const crypto = require('crypto')
+const multer = require('multer')
+const GridFsStorage = require('multer-gridfs-storage')
+const Grid = require('gridfs-stream')
+const app = express()
+
 app.use(cors());
 var port = 8000;  
 app.use(express.static('public'));  
@@ -15,7 +21,7 @@ app.use(bodyParser.urlencoded({extended:true, limit:'5mb'}));
 var mongoDB = 'mongodb://127.0.0.1/vendor_medicine_data';
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('error', console.error.bind(console, 'MongoDB connection error:'));
 
 var model = require('./models/medicine_record')
 app.get("/api/getdata/:query",function(req,res){
@@ -66,6 +72,62 @@ app.get("/api/getNewsData/:query",function(req,res){
     });
 });
 
+const mongoURI = 'mongodb://127.0.0.1:27017/vendor_medicine_data';
+let conn2 = mongoose.connection;
+let gfs;
+let gridFSBucket;
+conn2.once('open', () => {
+    gfs = Grid(conn2.db, mongoose.mongo)
+    gridFSBucket = new mongoose.mongo.GridFSBucket(conn2.db, {
+        bucketName: 'imageUpload'
+    });
+    gfs.collection('imageUpload');
+});
+
+let storage = new GridFsStorage({
+    url: mongoURI,
+    file: (req, file) => {
+        return new Promise(
+            (resolve, reject) => {
+                       const fileInfo = {
+                    filename: file.originalname,
+                    bucketName: "imageUpload"
+                }
+                resolve(fileInfo)
+
+            }
+        )
+    }
+});
+const upload = multer({ storage })
+app.post("/api/upload_image",upload.single("fileToUpload"),(req,res)=>{
+    res.json({file:req.file})
+});
+
+app.get('/api/image_retriever/:filename', (req, res) => {
+    gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+        //check if files exist
+        if (!file || file.length == 0) {
+            return res.status(404).json({
+                err: "No files exist"
+            })
+        }
+        //file exist
+        const readStream = gridFSBucket.openDownloadStream(file._id);
+        readStream.pipe(res);
+    })
+});
+app.get('/api/list_image_files', (req, res) => {
+    gfs.files.find().toArray((err, files) => {
+        if (!files || files.length == 0) {
+            return res.status(404).json({
+                err: "No files exist"
+            })
+        }
+        // files exist
+        return res.json(files)
+    })
+});
 app.listen(port,function(){   
     console.log("server start on port "+ port);  
 }); 

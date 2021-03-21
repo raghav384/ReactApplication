@@ -1,10 +1,8 @@
 import './Search.css';
 import axios from 'axios';
 import Loader from './loader.gif';
-import {Component, Fragment} from 'react';
-import pharmeasy from './VendorsLogo/pharmeasy.png'
-import mg from './VendorsLogo/1mg.png'
-import logo from './HealthScroll_Logo.PNG'
+import {Component, Fragment} from 'react'
+
 import Demo from '../CardDesign/Card'
 import '../CardDesign/Box.css';
 import { Card } from "react-bootstrap";
@@ -180,9 +178,10 @@ render() {
 
 	return (
 		<div class="container">
+			<div><br></br></div>
 			<div class="grid-container">
 				<div class="healthScrollLogo">
-					<img class="logo-style" alt="" src ={logo}></img>
+					<img class="logo-style" src ="http://localhost:8000/api/image_retriever/HealthScroll.png"></img>
 				</div>
 				<div class="Description">
 					<h1>Deals of medicine from various pharmacies All in one place !!!</h1>
@@ -205,8 +204,8 @@ render() {
 				<div class="Vendors">
 					<table class="vendor_table_styling">
 						<tr>
-							<td><img class="img-style" alt="" src={pharmeasy}></img></td>
-							<td><img class="img-style" alt="" src={mg}></img></td>
+							<td><img class="img-style" src="http://localhost:8000/api/image_retriever/pharmeasy.png"></img></td>
+							<td><img class="img-style" src="http://localhost:8000/api/image_retriever/1mg.png"></img></td>
 						</tr>
 					</table>
 				</div>
