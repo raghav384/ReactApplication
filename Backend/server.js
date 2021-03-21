@@ -3,7 +3,8 @@ var bodyParser = require('body-parser');
 var morgan = require("morgan");  
 var mongoose = require('mongoose');
 var cors = require('cors');
-
+var request = require('request');
+const axios = require('axios');
 var app = express();
 app.use(cors());
 var port = 8000;  
@@ -48,6 +49,21 @@ app.get("/api/getdata/:query",function(req,res){
 
 app.get("/api/healthcheck",function(req,res){
     res.send("The backend server is working fine");
+});
+
+app.get("/api/getNewsData/:query",function(req,res){
+    if(req.params.query == 'saurav_tech'){
+        var url = 'https://saurav.tech/NewsAPI/top-headlines/category/health/in.json';}
+    axios.get(url)
+    .then(response => {
+        if(req.params.query == 'saurav_tech'){
+            res.send(response.data.articles);} 
+            // returning array of json objects, Each Object is a news
+        else {res.send("Not defined News API");}
+    })
+    .catch(error => {
+        console.log(error);
+    });
 });
 
 app.listen(port,function(){   
