@@ -2,9 +2,6 @@ import './Search.css';
 import axios from 'axios';
 import Loader from './loader.gif';
 import {Component, Fragment} from 'react';
-import pharmeasy from './VendorsLogo/pharmeasy.png'
-import mg from './VendorsLogo/1mg.png'
-import logo from './HealthScroll_Logo.PNG'
 
 class Search extends Component {
 
@@ -78,9 +75,10 @@ render() {
 
 	return (
 		<div class="container">
+			<div><br></br></div>
 			<div class="grid-container">
 				<div class="healthScrollLogo">
-					<img class="logo-style" src ={logo}></img>
+					<img class="logo-style" src ="http://localhost:8000/api/image_retriever/HealthScroll.png"></img>
 				</div>
 				<div class="Description">
 					<h1>Deals of medicine from various pharmacies All in one place !!!</h1>
@@ -103,8 +101,8 @@ render() {
 				<div class="Vendors">
 					<table class="vendor_table_styling">
 						<tr>
-							<td><img class="img-style" src={pharmeasy}></img></td>
-							<td><img class="img-style" src={mg}></img></td>
+							<td><img class="img-style" src="http://localhost:8000/api/image_retriever/pharmeasy.png"></img></td>
+							<td><img class="img-style" src="http://localhost:8000/api/image_retriever/1mg.png"></img></td>
 						</tr>
 					</table>
 				</div>

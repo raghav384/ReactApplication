@@ -16,10 +16,10 @@ class App extends React.Component {
         <Route path='/Health Blog' component={HealthBlog} />
         <Route path='/Medicine Search' component={Search} />
         <Route path='/Sign up' component={SignUp} />
+		<Route path='/' component={Header} />
       </Switch>
     </Router>
-				<Header/>
-				<Search/>
+				
 			</div>
 		);
 	}
