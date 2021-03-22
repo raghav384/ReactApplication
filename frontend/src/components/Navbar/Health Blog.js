@@ -1,16 +1,9 @@
 import React from 'react';
-
+import NewsSection from '../NewsSection/News.js';
 const HealthBlog = () => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '90vh'
-      }}
-    >
-      <h1>Health Blog</h1>
+    <div class="container">  
+      <NewsSection />
     </div>
   );
 };
