@@ -1,6 +1,6 @@
 import React, { Fragment,useRef} from "react"
 import {Form,Button,Card} from "react-bootstrap";
-import {useAuth} from '../Context/AuthContext';
+//import {useAuth} from '../Context/AuthContext';
 import { Link, useHistory } from "react-router-dom";
 export default function Signup() {
     const emailRef=useRef()
