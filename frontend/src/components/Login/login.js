@@ -1,10 +1,10 @@
 import React from "react";
 import Signup from "./Signup.js";
 import {Container,Row,Col} from "react-bootstrap";
-import {AuthProvider} from './Context/AuthContext';
+//import {AuthProvider} from './Context/AuthContext';
 export default function login() {
   return (
-    <AuthProvider>
+    
     <Container
       className="d-flex align-items-center justify-content-center"
       style={{ minHeight: "100vh"}}
@@ -13,6 +13,6 @@ export default function login() {
         <Signup/>
         </div>
         </Container>
-        </AuthProvider>
+       
   );
 }
