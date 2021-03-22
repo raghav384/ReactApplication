@@ -1,13 +1,13 @@
 import React, { Fragment,useRef} from "react"
 import {Form,Button,Card} from "react-bootstrap";
 //import {useAuth} from '../Context/AuthContext';
-import { Link, useHistory } from "react-router-dom";
+//import { Link, useHistory } from "react-router-dom";
 export default function Signup() {
     const emailRef=useRef()
     const passwordRef=useRef()
     const passwordConfirmRef=useRef()
-    const { signup} = useAuth()
-    async function handleSubmit(e)
+  //  const { signup} = useAuth()
+  /*  async function handleSubmit(e)
     {
         e.preventDefault()
         if (passwordRef.current.value !== passwordConfirmRef.current.value) 
@@ -23,7 +23,7 @@ export default function Signup() {
             setError("Failed to create an account")
           }
           setLoading(false)
-    }
+    }*/
     return (
         <Fragment>
             <Card>
