@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Navbar from './components/Navbar/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import HealthBlog from './components/Navbar/Health Blog';
-import SignUp from './components/Navbar/Sign up';
+import SignUp from './components/Navbar/SignUp';
 
 class App extends React.Component {
 	render() {
@@ -15,11 +15,9 @@ class App extends React.Component {
       <Switch>
         <Route path='/Health Blog' component={HealthBlog} />
         <Route path='/Medicine Search' component={Search} />
-        <Route path='/Sign up' component={SignUp} />
+        <Route path='/SignUp' component={SignUp} />
       </Switch>
     </Router>
-				<Header/>
-				<Search/>
 			</div>
 		);
 	}
