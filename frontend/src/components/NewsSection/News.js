@@ -66,7 +66,7 @@ const renderCard = (card, index) => {
 			</div>
 			
 			<div class="card-footer" style={{backgroundColor:'#282A2B'}}>
-				<small class="text-muted" style={{color:'wheat'}}>By {card.author} &nbsp; &nbsp; Last Updated {card.publishedAt}  &nbsp; &nbsp; &nbsp; &nbsp; 
+				<small class="text-muted" style={{color:'white'}}>By {card.author} &nbsp; &nbsp; Last Updated {card.publishedAt}  &nbsp; &nbsp; &nbsp; &nbsp; 
 				<a class="card-text" href={card.url} >For More Info</a>
 				</small>
 			</div>

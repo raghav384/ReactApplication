@@ -1,6 +1,6 @@
 import React from 'react';
-import NewsSection from '../NewsSection/News.js';
-const HealthBlog = () => {
+import NewsSection from './News';
+const NewsAndBlogs = () => {
   return (
     <div class="container">  
       <NewsSection />
@@ -8,4 +8,4 @@ const HealthBlog = () => {
   );
 };
 
-export default HealthBlog;
+export default NewsAndBlogs;

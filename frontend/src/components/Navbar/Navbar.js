@@ -19,21 +19,21 @@ const Navbar = () => {
         <Bars />
         <NavMenu>
         
-          <NavLink to='/Health Blog'   style = {{fontSize: "20px" }}>
+          <NavLink to='/HealthBlog'   style = {{fontSize: "20px" }}>
            <i class="fa fa-newspaper-o"></i>
            &nbsp;&nbsp;Health Blog and News Section
           </NavLink>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;
-          <NavLink to='/Medicine Search' style = {{fontSize: "20px" }}> <i class="fa fa-search"></i>
+          <NavLink to='/MedicineSearch' style = {{fontSize: "20px" }}> <i class="fa fa-search"></i>
           &nbsp;&nbsp;Medicine Search
           </NavLink>
           {/* Second Nav */}
           {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
         </NavMenu>
         <NavBtn> 
-          <NavBtnLink to='/Sign Lup'>Log-in </NavBtnLink> 
+          <NavBtnLink to='/Signup'>Log-in </NavBtnLink> 
         </NavBtn>
       </Nav>
     </>
