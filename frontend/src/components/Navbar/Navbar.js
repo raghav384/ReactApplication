@@ -8,7 +8,7 @@ import {
   NavBtnLink
 } from './NavbarElements';
 import logo from './logo.PNG';
-
+import login from "../Login/login";
 const Navbar = () => {
   return (
     <>
@@ -33,7 +33,7 @@ const Navbar = () => {
           {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
         </NavMenu>
         <NavBtn> 
-          <NavBtnLink to='/Signup'>Log-in </NavBtnLink> 
+          <NavBtnLink to='/login'>Login</NavBtnLink>
         </NavBtn>
       </Nav>
     </>
