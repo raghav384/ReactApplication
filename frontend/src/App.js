@@ -1,10 +1,11 @@
 import React from 'react';
 import Search from "./components/SearchBar/Search";
-import Header from "./components/Header";
+//import Header from "./components/Header";
 import Navbar from './components/Navbar/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import HealthBlog from './components/Navbar/Health Blog';
-import SignUp from './components/Navbar/SignUp';
+import login from './components/Login/login';
+import Signup from './components/Login/Signup';
 
 class App extends React.Component {
 	render() {
@@ -15,7 +16,8 @@ class App extends React.Component {
       <Switch>
         <Route path='/Health Blog' component={HealthBlog} />
         <Route path='/Medicine Search' component={Search} />
-        <Route path='/SignUp' component={SignUp} />
+        <Route path='/login' component={login} />
+        <Route path='/SignUp' component={Signup} />
       </Switch>
     </Router>
 			</div>

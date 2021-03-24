@@ -4,6 +4,8 @@ import { Form, Button, Card, Alert } from "react-bootstrap"
 import { Link, useHistory } from "react-router-dom"
 
 export default function Signup() {
+  const firstNameRef = useRef()
+  const lastNameRef = useRef()
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
@@ -33,11 +35,19 @@ export default function Signup() {
 
   return (
     <>
-      <Card>
+      <Card style={{ maxWidth: "400px" ,marginLeft :"500px",marginTop: "50px",backgroundColor:"#DCDCDC",borderRadius:"15px",fontSize :"large" }}>
         <Card.Body>
-          <h2 className="text-center mb-4">Sign Up</h2>
+          <h2 className="text-center mb-4" style={{fontSize :"25px"}}>Sign Up</h2>
           {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} >
+          <Form.Group id="firstName">
+              <Form.Label>First Name</Form.Label>
+              <Form.Control type="text" ref={firstNameRef} required />
+            </Form.Group>
+            <Form.Group id="lastName">
+              <Form.Label>Last Name</Form.Label>
+              <Form.Control type="text" ref={lastNameRef} required />
+            </Form.Group>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
@@ -50,15 +60,16 @@ export default function Signup() {
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control type="password" ref={passwordConfirmRef} required />
             </Form.Group>
-            <Button disabled={loading} className="w-100" type="submit">
+            <Button disabled={loading} className="w-20" type="submit" style={{width:"50%",marginLeft: "90px",fontSize :"15px"}} type="submit">
               Sign Up
             </Button>
+            <div className="w-100 text-center mt-2">
+        Already have an account? <Link to="/login">Log In</Link>
+      </div>
           </Form>
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2">
-        Already have an account? <Link to="/login">Log In</Link>
-      </div>
+     
     </>
   )
 }
