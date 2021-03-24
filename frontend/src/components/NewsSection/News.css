@@ -1,0 +1,19 @@
+.box-1{
+padding: 5px;
+}
+
+.grid-1{
+	margin-top: 40px;
+	display: grid;
+	grid-template-columns: auto;
+	row-gap: 10px;
+  }
+  
+.grid-1 > div {
+	background-color: rgb(255,255,255);
+	font-size: 15px;
+}
+.card-horizontal {
+	display: flex;
+	flex: 1 1 auto;
+  }

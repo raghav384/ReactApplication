@@ -14,22 +14,26 @@ const Navbar = () => {
     <>
       <Nav>
         <NavLink to='/'>
-          <img src = {logo} style = {{width: "100px" , height: "80px"}}/>
+          <img  alt = "" src ="http://localhost:8000/api/image_retriever/HealthScroll.png" style = {{width: "100px" , height: "60px"}}/>
         </NavLink>
         <Bars />
         <NavMenu>
         
-          <NavLink to='/Health Blog' activeStyle  style = {{fontSize: "20px" }}> <i class="fa fa-newspaper-o"></i>
-            Health Blog and News Section
+          <NavLink to='/HealthBlog'   style = {{fontSize: "20px" }}>
+           <i class="fa fa-newspaper-o"></i>
+           &nbsp;&nbsp;Health Blog and News Section
           </NavLink>
-          <NavLink to='/Medicine Search' activeStyle style = {{fontSize: "20px" }}> <i class="fa fa-search"></i>
-           Medicine Search
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;
+          <NavLink to='/MedicineSearch' style = {{fontSize: "20px" }}> <i class="fa fa-search"></i>
+          &nbsp;&nbsp;Medicine Search
           </NavLink>
           {/* Second Nav */}
           {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
         </NavMenu>
         <NavBtn> 
-          <NavBtnLink to='/login'>Login</NavBtnLink> 
+          <NavBtnLink to='/login'>Login</NavBtnLink>
         </NavBtn>
       </Nav>
     </>
