@@ -11,22 +11,24 @@ const multer = require('multer')
 const GridFsStorage = require('multer-gridfs-storage')
 const Grid = require('gridfs-stream')
 const app = express()
+var session = require('express-session');
+var connection = require('./connection.js');
+app.use(session({
+	secret: 'secret',
+	resave: false,
+	saveUninitialized: true
+}));
 
 app.use(cors());
 var port = 8000;  
 app.use(express.static('public'));  
-app.use(bodyParser.json({limit:'500mb'}));    
-app.use(bodyParser.urlencoded({extended:true, limit:'5mb'}));
 
 var mongoDB = 'mongodb://127.0.0.1/vendor_medicine_data';
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 var db = mongoose.connection;
 db.once('error', console.error.bind(console, 'MongoDB connection error:'));
-
 var model = require('./models/medicine_record')
 app.get("/api/getdata/:query",function(req,res){
-  //console.log(req.params.query)     
-  
   model.aggregate([
   {'$match':    {'medicine_name' :  {'$regex': req.params.query , '$options' : 'i'} }},
   {'$sort' : {'time_of_insertion':-1}},
@@ -131,3 +133,41 @@ app.get('/api/list_image_files', (req, res) => {
 app.listen(port,function(){   
     console.log("server start on port "+ port);  
 }); 
+
+
+app.post('/api/authenticate_user', function(req, res) {
+
+	if(req.session.loggedin)	req.session.destroy();
+	//var username=req.body.username;
+    //var password=req.body.password;
+    console.log(req.body);
+    /*connection(function(err,db2){
+        var dbo = db2.db("HealthScrollDB");
+        var query = { address: "Park Lane 38" };
+        dbo.collection("customers").find(query).toArray(function(err, result) {
+        if (err) throw err;
+        console.log(result);
+        db2.close();
+  });
+});*/
+
+});
+
+app.post('/api/register_user', function(req, res) {
+	if(req.session.loggedin)	req.session.destroy();
+    
+    /*
+    //object construction from React exposed values
+    var myobj = { name: "Company Inc", address: "Park Lane 38" };
+    
+    connection(function(err,db2){
+        var dbo = db2.db("HealthScrollDB");
+        dbo.collection("customers").insertOne(myobj, function(err, res) {
+        if (err) throw err;
+        console.log("1 document inserted");
+        db2.close();
+    });
+});*/
+});
+
+
