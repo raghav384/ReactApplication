@@ -18,7 +18,7 @@ app.use(session({
 	resave: false,
 	saveUninitialized: true
 }));
-
+app.use(bodyParser.json());
 app.use(cors());
 var port = 8000;  
 app.use(express.static('public'));  
@@ -140,7 +140,9 @@ app.post('/api/authenticate_user', function(req, res) {
 	if(req.session.loggedin)	req.session.destroy();
 	//var username=req.body.username;
     //var password=req.body.password;
+    console.log("hellO_world");
     console.log(req.body);
+    res.send("user_not_found");
     /*connection(function(err,db2){
         var dbo = db2.db("HealthScrollDB");
         var query = { address: "Park Lane 38" };

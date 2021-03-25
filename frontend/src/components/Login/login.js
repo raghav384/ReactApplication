@@ -1,8 +1,9 @@
 import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 //import { useAuth } from "../contexts/AuthContext"
-import { Link, useHistory } from "react-router-dom"
-
+import { Link, useHistory,Redirect } from "react-router-dom"
+import axios from 'axios'
+//import { Redirect } from "react-router-dom";
 export default function Login() {
   const emailRef = useRef()
   const passwordRef = useRef()
@@ -10,10 +11,34 @@ export default function Login() {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useHistory()
-
+  //const [records,setRecords]=useState("");
   async function handleSubmit(e) {
-    e.preventDefault()
-
+    e.preventDefault();
+      // var newRecord={
+      //   "email" : emailRef.current.value,
+      //   "password" : passwordRef.current.value
+      // }
+     // console.log(newRecord);
+      axios
+      .post('http://localhost:8000/api/authenticate_user',{
+        "email" : emailRef.current.value,
+        "password" : passwordRef.current.value
+      })
+      .then(response => {
+        if(response == "user_not_found")
+        {
+          //alert and routing
+          <Redirect to = {{ pathname: "/login" }} />
+        }
+       // console.log("hell1");
+        console.log(response)
+      })
+      .catch(error => {
+      //  console.log("hell2");
+        console.log(error);
+      })
+     // console.log(emailRef.current.value);
+     
     try {
       setError("")
       setLoading(true)
