@@ -5,6 +5,7 @@ import { Link, useHistory } from "react-router-dom"
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import './login.css';
+import axios from "axios";
 export default function Login() {
   const emailRef = useRef()
   const passwordRef = useRef()
@@ -29,10 +30,16 @@ export default function Login() {
   }
   const responseFacebook = (response) => {
     console.log(response);
+    axios.post('http://localhost:8000/api/login_fb',response).then((res)=>{
+     console.log(res);
+  });
   }
 
   const responseGoogle = (response) => {
     console.log(response);
+    axios.post('http://localhost:8000/api/login_google',response).then((res)=>{
+      console.log(res);
+   });
   }
 
   return (
