@@ -2,7 +2,9 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 //import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
-
+import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
+import './login.css';
 export default function Login() {
   const emailRef = useRef()
   const passwordRef = useRef()
@@ -24,6 +26,13 @@ export default function Login() {
     }
 
     setLoading(false)
+  }
+  const responseFacebook = (response) => {
+    console.log(response);
+  }
+
+  const responseGoogle = (response) => {
+    console.log(response);
   }
 
   return (
@@ -48,12 +57,26 @@ export default function Login() {
         Need an account? <Link to="/SignUp">Sign Up</Link>
       </div>
           </Form>
-          <Button  disabled={loading} className="w-100" type="submit" style={{borderColor:"#4169E1",backgroundColor : "#4169E1",width:"40%",marginTop:"20px",marginLeft: "3px",fontSize :"15px"}}>
-              Login With Facebook
-            </Button>
-            <Button disabled={loading} className="w-100" type="submit" style={{borderColor:"#B22222",backgroundColor:"#B22222",width:"40%",marginTop:"20px",marginLeft: "3px",fontSize :"15px"}}>
-              Login With Google
-            </Button>
+          <div style={{width:"80%"}}>
+            <br>
+            </br>
+          <FacebookLogin 
+        appId="3825163174199146" //APP ID NOT CREATED YET
+        fields="name,email,picture"
+        callback={responseFacebook}
+        
+        />
+      </div>
+      <br></br>
+       <div>
+      <GoogleLogin
+        clientId="644415206269-8dtrmg5l216aueioc1sl64euocbls8ru.apps.googleusercontent.com" //CLIENTID NOT CREATED YET
+        buttonText="LOGIN WITH GOOGLE"
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+        
+      />
+      </div>
         </Card.Body>
       </Card>
       </div>
