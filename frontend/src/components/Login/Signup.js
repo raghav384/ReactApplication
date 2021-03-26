@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 //import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
+import axios from 'axios'
 
 export default function Signup() {
   const firstNameRef = useRef()
@@ -21,7 +22,7 @@ export default function Signup() {
       return setError("Passwords do not match")
     }
     axios
-    .post('http://localhost:8000/api/register_user',{
+    .post('http://localhost:8000/api/register_user/website_signup',{
       "firstName":firstNameRef.current.value,
       "lastName":lastNameRef.current.value,
       "email" : emailRef.current.value,
@@ -29,13 +30,8 @@ export default function Signup() {
       "confirmPassword": passwordConfirmRef.current.value
     })
     .then(response => {
-      if(response == "user_not_found")
-      {
-        //alert and routing
-        //history.push("/login");
-      }
-     // console.log("hell1");
-      console.log(response)
+      if(response)
+        console.log(response)
     })
     .catch(error => {
     //  console.log("hell2");
