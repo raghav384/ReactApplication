@@ -5,7 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import login from './components/Login/login';
 import Signup from './components/Login/Signup';
-import NewsAndBlogs from './components/NewsSection/NewsAndBlogs';
+import NewsComponent from './components/NewsSection/NewsComponent';
 
 class App extends React.Component {
 	render() {
@@ -14,7 +14,7 @@ class App extends React.Component {
 	<Router>
       <Navbar />
       <Switch>
-        <Route path='/HealthBlog' component={NewsAndBlogs} />
+        <Route path='/NewsSection' component={NewsComponent} />
         <Route path='/MedicineSearch' component={Search} />
         <Route path='/login' component={login} />
         <Route path='/SignUp' component={Signup} />
