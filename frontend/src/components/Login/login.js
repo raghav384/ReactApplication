@@ -25,7 +25,7 @@ export default function Login() {
         if(response == "user_not_found")
         {
           //alert and routing
-          <Redirect to = {{ pathname: "/login" }} />
+          //<Redirect to = {{ pathname: "/login" }} />
         }
        // console.log("hell1");
         console.log(response)
@@ -47,17 +47,15 @@ export default function Login() {
   }
   const responseFacebook = (response) => {
     console.log(response);
-    axios.post('http://localhost:8000/api/login_fb',response).then((res)=>{
+    axios.post('http://localhost:8000/api/register_user/fb_login',response).then((res)=>{
      console.log(res);
   });
   }
 
   const responseGoogle = (response) => {
-    console.log(response);
-    axios.post('http://localhost:8000/api/login_google',response).then((res)=>{
-      console.log(res);
+    axios.post('http://localhost:8000/api/register_user/google_login',response).then((res)=>{
    });
-  }
+}
 
   return (
     <div>

@@ -55,18 +55,6 @@ app.get("/api/getdata/:query",function(req,res){
   })
  });
 
-app.post("/api/login_fb",function(req,res){
-
-console.log(req.body);
-res.send('this is server');
-});
-app.post("/api/login_google",function(req,res){
-console.log(req.body);
-res.send("workinf fine");
-    
-});
-
-
 app.get("/api/healthcheck",function(req,res){
     res.send("The backend server is working fine");
 });
@@ -152,36 +140,39 @@ app.listen(port,function(){
 app.post('/api/authenticate_user', function(req, res) {
 
 	if(req.session.loggedin)	req.session.destroy();
-	//var username=req.body.username;
-    //var password=req.body.password;
-    console.log(req.body);
-    /*connection(function(err,db2){
+	var visitor_email=req.body.email;
+    var visitor_password=req.body.password;
+
+    connection(function(err,db2){
         var dbo = db2.db("HealthScrollDB");
-        var query = { address: "Park Lane 38" };
-        dbo.collection("customers").find(query).toArray(function(err, result) {
-        if (err) throw err;
-        console.log(result);
-        db2.close();
-  });
-});*/
+        var query = { email:visitor_email, password:visitor_password };
+        dbo.collection("login_records").find(query).toArray(function(err, result) {
+            if (err) throw err;
+            console.log("No of records found: ",result.length);
+            if(result.length == 1) res.send("User Credentials exists");
+            else res.send("user_not_found");
+            db2.close();
+    });
+});
 
 });
 
-app.post('/api/register_user', function(req, res) {
+app.post('/api/register_user/:query', function(req, res) {
 	if(req.session.loggedin)	req.session.destroy();
-    
-    /*
-    //object construction from React exposed values
-    var myobj = { name: "Company Inc", address: "Park Lane 38" };
-    
+    var source = req.params.query;
+    var user_details = req.body;
+    user_details["insertion_source"] = source;
+
     connection(function(err,db2){
         var dbo = db2.db("HealthScrollDB");
-        dbo.collection("customers").insertOne(myobj, function(err, res) {
+        dbo.collection("login_records").insertOne(user_details, function(err,result) {
         if (err) throw err;
-        console.log("1 document inserted");
+        console.log("User details succesfully inserted into MongoDB Instance");
+        res.send("User Successfully Created");
         db2.close();
     });
-});*/
+
+});
 });
 
 
