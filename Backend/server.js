@@ -22,7 +22,7 @@ app.use(session({
 app.use(cors());
 var port = 8000;  
 app.use(express.static('public'));  
-
+app.use(express.json());
 var mongoDB = 'mongodb://127.0.0.1/vendor_medicine_data';
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 var db = mongoose.connection;
@@ -55,6 +55,18 @@ app.get("/api/getdata/:query",function(req,res){
   })
  });
 
+app.post("/api/login_fb",function(req,res){
+
+console.log(req.body);
+res.send('this is server');
+});
+app.post("/api/login_google",function(req,res){
+console.log(req.body);
+res.send("workinf fine");
+    
+});
+
+
 app.get("/api/healthcheck",function(req,res){
     res.send("The backend server is working fine");
 });
@@ -73,6 +85,8 @@ app.get("/api/getNewsData/:query",function(req,res){
         console.log(error);
     });
 });
+
+
 
 const mongoURI = 'mongodb://127.0.0.1:27017/vendor_medicine_data';
 let conn2 = mongoose.connection;
