@@ -16,7 +16,24 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-
+    axios
+      .post('http://localhost:8000/api/authenticate_user',{
+        "email" : emailRef.current.value,
+        "password" : passwordRef.current.value
+      })
+      .then(response => {
+        if(response == "user_not_found")
+        {
+          //alert and routing
+          <Redirect to = {{ pathname: "/login" }} />
+        }
+       // console.log("hell1");
+        console.log(response)
+      })
+      .catch(error => {
+      //  console.log("hell2");
+        console.log(error);
+      })
     try {
       setError("")
       setLoading(true)
