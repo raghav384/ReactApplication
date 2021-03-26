@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.demo-editor{
+  height: 200px!important;
+  border: 1px solid;
+}
+.blog-card
+{
+  -webkit-box-shadow: -1px 4px 15px 1px rgba(0,0,0,0.39);
+-moz-box-shadow: -1px 4px 15px 1px rgba(0,0,0,0.39);
+box-shadow: -1px 4px 15px 1px rgba(0,0,0,0.39);
+padding: 11px;
+border-radius: 10px;
+}

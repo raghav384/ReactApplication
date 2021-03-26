@@ -21,7 +21,11 @@ const Navbar = () => {
         
           <NavLink to='/Health Blog' activeStyle  style = {{fontSize: "20px" }}>
            <i class="fa fa-newspaper-o"></i>
-           &nbsp;&nbsp;Health Blog and News Section
+           &nbsp;&nbsp;Health Blog 
+          </NavLink>
+          <NavLink to='/News Section' activeStyle  style = {{fontSize: "20px" }}>
+           <i class="fa fa-newspaper-o"></i>
+           &nbsp;&nbsp;News Section
           </NavLink>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

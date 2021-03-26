@@ -5,7 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import HealthBlog from './components/Navbar/Health Blog';
 import SignUp from './components/Navbar/Sign up';
-
+import Redirect from './pages/redirect'
 class App extends React.Component {
 	render() {
 		return (
@@ -14,9 +14,11 @@ class App extends React.Component {
       <Navbar />
       <Switch>
         <Route path='/Health Blog' component={HealthBlog} />
+        <Route path='/News Section' component={HealthBlog} />
         <Route path='/Medicine Search' component={Search} />
         <Route path='/Sign up' component={SignUp} />
-		<Route path='/' component={Header} />
+		<Route path='/' exact component={Header} />
+		<Route path='/redirect' component={Redirect} />
       </Switch>
     </Router>
 				
