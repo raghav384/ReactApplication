@@ -18,7 +18,9 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
-
+import {useHistory} from 'react-router-dom'
+import fromimg from '../../images/health.png'
+import toimg from '../../images/pharma.png'
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 350,
@@ -41,11 +43,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: red[500],
   },
 }));
-
 export default function RecipeReviewCard(props) {
+ 
+  console.log(props,"propps")
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-
+  const history=useHistory();
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -87,8 +90,17 @@ export default function RecipeReviewCard(props) {
 
         <CardContent>
           
-      <Button variant="contained" color="primary" href={props.dataToPass.medicine_url}>
-  Link to Website </Button>
+      <Button variant="contained" color="primary" onClick={history.push({
+           pathname: '/redirect',
+           state: { fromimg,toimg,from:"From name",to:"To name",redirectUrl:props.dataToPass.medicine_url,redirectTime:10000 }
+       })}>
+      Link to Website
+
+      {
+        //pass this url as prop
+        //props.dataToPass.medicine_url
+      }
+   </Button>
         </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">

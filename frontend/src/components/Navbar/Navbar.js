@@ -8,32 +8,36 @@ import {
   NavBtnLink
 } from './NavbarElements';
 import logo from './logo.PNG';
-import login from "../Login/login";
+
 const Navbar = () => {
   return (
     <>
       <Nav>
         <NavLink to='/'>
-          <img  alt = "" src ="http://localhost:8000/api/image_retriever/HealthScroll.png" style = {{width: "100px" , height: "60px"}}/>
+          <img src ="http://localhost:8000/api/image_retriever/HealthScroll.png" style = {{width: "100px" , height: "60px"}}/>
         </NavLink>
         <Bars />
         <NavMenu>
         
-          <NavLink to='/HealthBlog'   style = {{fontSize: "20px" }}>
+          <NavLink to='/Health Blog' activeStyle  style = {{fontSize: "20px" }}>
            <i class="fa fa-newspaper-o"></i>
-           &nbsp;&nbsp;Health Blog and News Section
+           &nbsp;&nbsp;Health Blog 
+          </NavLink>
+          <NavLink to='/News Section' activeStyle  style = {{fontSize: "20px" }}>
+           <i class="fa fa-newspaper-o"></i>
+           &nbsp;&nbsp;News Section
           </NavLink>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;
-          <NavLink to='/MedicineSearch' style = {{fontSize: "20px" }}> <i class="fa fa-search"></i>
+          <NavLink to='/Medicine Search' activeStyle style = {{fontSize: "20px" }}> <i class="fa fa-search"></i>
           &nbsp;&nbsp;Medicine Search
           </NavLink>
           {/* Second Nav */}
           {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
         </NavMenu>
         <NavBtn> 
-          <NavBtnLink to='/login'>Login</NavBtnLink>
+          <NavBtnLink to='/Sign Lup'>Log-in </NavBtnLink> 
         </NavBtn>
       </Nav>
     </>
