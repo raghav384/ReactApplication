@@ -18,27 +18,33 @@ const Navbar = () => {
         </NavLink>
         <Bars />
         <NavMenu>
+        <NavLink to='/MedicineSearch' style = {{fontSize: "20px" }}> <i class="fa fa-search"></i>
+          &nbsp;&nbsp;Medicine Search
+        </NavLink>
+          
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         
         <NavLink to='/HealthBlog/HealthBlog' activeStyle  style = {{fontSize: "20px" }}>
            <i class="fa fa-newspaper-o"></i>
            &nbsp;&nbsp;Health Blog 
-          </NavLink>
-          <NavLink to='/News Section' activeStyle  style = {{fontSize: "20px" }}>
-           <i class="fa fa-newspaper-o"></i>
-           &nbsp;&nbsp;News Section
-          </NavLink>
+        </NavLink>
+        
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;
-          <NavLink to='/MedicineSearch' style = {{fontSize: "20px" }}> <i class="fa fa-search"></i>
-          &nbsp;&nbsp;Medicine Search
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <NavLink to='/NewsSection' activeStyle  style = {{fontSize: "20px" }}>
+          <i class="fa fa-newspaper-o"></i> &nbsp;&nbsp;News Section
+        </NavLink>
+          
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          
+          <NavLink to='/login' activeStyle  style = {{fontSize: "20px" }}>
+            <i class="fa fa-sign-in" aria-hidden="true"></i> &nbsp;&nbsp;Login
           </NavLink>
-          {/* Second Nav */}
-          {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
+
         </NavMenu>
-        <NavBtn> 
-          <NavBtnLink to='/login'>Login</NavBtnLink>
-        </NavBtn>
       </Nav>
     </>
   );
