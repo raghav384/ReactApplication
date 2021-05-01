@@ -89,7 +89,7 @@ class Search extends Component {
 		  } = this.state;
 		  let tempRes = Array.from(results);
 		  const totalRecords = tempRes.length;
-		  if ( totalRecords === 0) return <h2> No Results Found</h2>;
+		  if ( totalRecords === 0 ) return <h2> </h2>;
           //console.log(results,currentPageResults,currentPage,totalPages)	  
 		  const headerClass = [
 			"text-dark py-2 pr-4 m-0",
