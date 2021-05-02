@@ -4,33 +4,37 @@ import { Link } from 'react-router-dom';
 import {Button} from "react-bootstrap"
 import axios from 'axios';
 
-
-
-
-
 class Footer extends Component {
 
-    constructor(props){
-    super(props)
+    constructor(){
+    super();
 
     this.state={
-        email: ''
-    }
+        email: ""
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 }
-changeHandler=(e) => {
-    this.setState({[e.target.name]: e.target.value})
+handleChange(event) {
+    let email = this.state.email;
+    email = event.target.value;
+    this.setState({email});
+    
 }
 
-
-submitHandler = e =>{
-    e.preventDefault()
-    axios.post('',this.state)
+handleSubmit(event){
+    event.preventDefault()
+    const email = this.state.email;
+    axios.post('http://localhost:8000/api/subscribe',{email})
     .then(response =>{
         console.log(response)
+        if(response.data="Thankyou you for subscribing us !!!")
+          alert('Succesfully Subscribed');
     })
     .catch(error => {
         console.log(error)
     })
+    this.setState({email: ""});
 }
 
 
@@ -39,32 +43,32 @@ render() {
 const { email } = this.state
 
   return (
-    <div className='footer-container'>
-      <section className='footer-subscription'>
-        <p className='footer-subscription-heading'>
+    <div class='footer-container'>
+      <section class='footer-subscription'>
+        <p class='footer-subscription-heading'>
         Want to receive exclusive Medicine offers? Subscribe to our newsletter
         </p>
-        <p className='footer-subscription-text'>
+        <p class='footer-subscription-text'>
           You can unsubscribe at any time.
         </p>
-        <div className='input-areas'>
-          <form onSubscribe={this.submitHandler}>
+        <div>
+          <form onSubmit={this.handleSubmit}>
             <input
-              className='footer-input'
+              class='footer-input'
               name='email'
               type='email'
-              placeholder='Your Email'
-              value = {email}
-              onchange = {this.changeHandler}
+              placeholder='Enter your email address'
+              value = {this.state.email}
+              onChange = {this.handleChange}
             />
+            <input type="submit" class='button-style' value="Subscribe"/>
             
-            <Button variant="secondary" size="lg">Subscribe</Button>
           </form>
         </div>
       </section>
       
           <div class='footer-logo'>
-            <Link to='/' className='social-logo'>
+            <Link to='/' class='social-logo'>
               HEALTHSCROLL
               <i class='fab fa-typo3' />
             </Link>

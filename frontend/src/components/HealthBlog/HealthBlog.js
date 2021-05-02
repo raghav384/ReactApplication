@@ -32,7 +32,7 @@ class HealthBlog extends React.Component {
 handleSubmit(event) {
   event.preventDefault();
   if(this.validate()){
-      console.log("Helloji");
+      
       const blog_to_post = this.state.input;
       console.log(blog_to_post);
       blog_to_post["date"] = new Date();
@@ -56,7 +56,7 @@ handleSubmit(event) {
           this.setState({input:input, editorState : EditorState.createEmpty()});
         })
         
-        //alert('Blog Submitted successfully.');
+        alert('Blog Submitted successfully.');
 
       })
   }
