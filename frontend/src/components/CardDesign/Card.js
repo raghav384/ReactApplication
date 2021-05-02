@@ -51,7 +51,9 @@ export default function RecipeReviewCard(props) {
     setExpanded(!expanded);
   };
   return (
-    <Card className={classes.root}>
+   // const vendor_name = {props.dataToPass._id.vendor_name}
+
+  <Card className={classes.root}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
@@ -65,6 +67,8 @@ export default function RecipeReviewCard(props) {
         }
         title= {props.dataToPass._id.medicine_name}
         subheader= {props.dataToPass._id.vendor_name}
+        
+        
       />
       {/* <CardMedia
         className={classes.media}

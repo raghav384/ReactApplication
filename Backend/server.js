@@ -24,37 +24,39 @@ var port = 8000;
 app.use(express.static('public'));  
 app.use(express.json());
 
-var mongoDB = 'mongodb://127.0.0.1/vendor_medicine_data';
+var mongoDB = 'mongodb://127.0.0.1/HealthScrollDB';
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 var db = mongoose.connection;
 db.once('error', console.error.bind(console, 'MongoDB connection error:'));
-var model = require('./models/medicine_record')
+var model = require('./models/medicine_record');
 app.get("/api/getdata/:query",function(req,res){
-  model.aggregate([
-  {'$match':    {'medicine_name' :  {'$regex': req.params.query , '$options' : 'i'} }},
-  {'$sort' : {'time_of_insertion':-1}},
-  {'$group' : { '_id' : {'medicine_name':'$medicine_name','vendor_name' : '$vendor_name'},
-    'medicine_price' : {'$first': '$medicine_price'} ,
-    'time_of_insertion' : {'$first': '$time_of_insertion'},
-    'medicine_manufacturer' : {'$first': '$medicine_manufacturer'},
-    'medicine_composition' : {'$first': '$medicine_composition'},
-    'medicine_number_of_strips' : {'$first': '$medicine_number_of_strips'},
-    'medicine_url' : {'$first': '$medicine_url'}
-  }}
+model.aggregate([
+    {'$match':    {'medicine_name' :  {'$regex': req.params.query , '$options' : 'i'} }},
+    {'$sort' : {'time_of_insertion':-1}},
+    {'$group' : { '_id' : {'medicine_name':'$medicine_name','vendor_name' : '$vendor_name'},
+      'medicine_price' : {'$first': '$medicine_price'} ,
+      'time_of_insertion' : {'$first': '$time_of_insertion'},
+      'medicine_manufacturer' : {'$first': '$medicine_manufacturer'},
+      'medicine_composition' : {'$first': '$medicine_composition'},
+      'medicine_number_of_strips' : {'$first': '$medicine_number_of_strips'},
+      'medicine_url' : {'$first': '$medicine_url'}
+    }}
+  
+    ]
+    ,function(err,out){
+  
+        if(err){
+            console.log(err);
+            res.send(err);
+        }
+        else{
+            console.log(out);
+            res.send(out);
+        }
+    })
+});
 
-  ]
-  ,function(err,out){
 
-      if(err){
-          console.log(err);
-          res.send(err);
-      }
-      else{
-          console.log(out);
-          res.send(out);
-      }
-  })
- });
 
 app.get("/api/healthcheck",function(req,res){
     res.send("The backend server is working fine");
@@ -75,9 +77,7 @@ app.get("/api/getNewsData/:query",function(req,res){
     });
 });
 
-
-
-const mongoURI = 'mongodb://127.0.0.1:27017/vendor_medicine_data';
+const mongoURI = 'mongodb://127.0.0.1:27017/HealthScrollDB';
 let conn2 = mongoose.connection;
 let gfs;
 let gridFSBucket;
@@ -224,3 +224,5 @@ app.post('/api/subscribe', function(req, res) {
     });
 });
 });
+
+
