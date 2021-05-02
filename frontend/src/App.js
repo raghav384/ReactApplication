@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import login from './components/Login/login';
 import Signup from './components/Login/Signup';
 import NewsComponent from './components/NewsSection/NewsComponent';
-import Redirect from './components/Redirect/redirect'
+import Redirect from './components/Redirect/redirect';
 import HealthBlog from './components/HealthBlog/HealthBlog';
 class App extends React.Component {
 	render() {
@@ -20,7 +20,7 @@ class App extends React.Component {
         <Route path='/MedicineSearch' component={Search} />
         <Route path='/login' component={login} />
         <Route path='/SignUp' component={Signup} />
-        <Route path='/redirect' component={Redirect} />
+        <Route path='/redirect/:id' component={Redirect} />
       </Switch>
     </Router>
 			</div>

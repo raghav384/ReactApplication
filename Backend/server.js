@@ -23,6 +23,7 @@ app.use(cors());
 var port = 8000;  
 app.use(express.static('public'));  
 app.use(express.json());
+
 var mongoDB = 'mongodb://127.0.0.1/vendor_medicine_data';
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 var db = mongoose.connection;
@@ -32,10 +33,10 @@ app.get("/api/getdata/:query",function(req,res){
   model.aggregate([
   {'$match':    {'medicine_name' :  {'$regex': req.params.query , '$options' : 'i'} }},
   {'$sort' : {'time_of_insertion':-1}},
-  {'$group' : { '_id' : {'medicine_name':'$medicine_name','vendor_name' : '$Vendor_Name'},
+  {'$group' : { '_id' : {'medicine_name':'$medicine_name','vendor_name' : '$vendor_name'},
     'medicine_price' : {'$first': '$medicine_price'} ,
     'time_of_insertion' : {'$first': '$time_of_insertion'},
-    'medicine_manufacturer' : {'$first': '$medicine_producer'},
+    'medicine_manufacturer' : {'$first': '$medicine_manufacturer'},
     'medicine_composition' : {'$first': '$medicine_composition'},
     'medicine_number_of_strips' : {'$first': '$medicine_number_of_strips'},
     'medicine_url' : {'$first': '$medicine_url'}
@@ -175,4 +176,36 @@ app.post('/api/register_user/:query', function(req, res) {
 });
 });
 
+app.post('/api/blog_insertion', function(req, res) {
+	if(req.session.loggedin)	req.session.destroy();
+    var blog_details = req.body;
+    blog_details["status"] = "pending_for_review";
+    console.log(blog_details);
 
+    connection(function(err,db2){
+        var dbo = db2.db("HealthScrollDB");
+        dbo.collection("blog_records").insertOne(blog_details, function(err,result) {
+        if (err) throw err;
+        console.log("Blog succesfully inserted into MongoDB Instance");
+        res.send("Blog Successfully Submitted");
+        db2.close();
+    });
+
+});
+});
+
+app.post('/api/subscribe', function(req, res) {
+	if(req.session.loggedin)	req.session.destroy();
+    var email_details = req.body;
+    console.log(email_details);
+
+    connection(function(err,db2){
+        var dbo = db2.db("HealthScrollDB");
+        dbo.collection("email_records").insertOne(email_details, function(err,result) {
+        if (err) throw err;
+        console.log("Email Address succesfully inserted into MongoDB Instance");
+        res.send("Thankyou you for subscribing us !!!");
+        db2.close();
+    });
+});
+});
