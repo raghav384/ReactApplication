@@ -58,49 +58,57 @@ export default function Login() {
 }
 
   return (
-    <div>
-      <Card style={{ maxWidth: "400px" ,marginLeft :"500px",marginTop: "100px",backgroundColor:"#DCDCDC",borderRadius:"15px",fontSize :"large" }}>
+    <div className="container-fluid" style={{ backgroundColor:"#43f7ca"}}>
+      <div >
+      <Card style={{ maxWidth: "400px" ,marginLeft :"500px",marginTop: "100px",backgroundColor:"#323635",borderRadius:"15px",fontSize :"large" }}>
         <Card.Body>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit} style={{maxWidth: "400px"}}>
-          <h2 className="text-center mb-4" style={{fontSize :"25px"}}>Log In</h2>
+          <h2 className="text-center mb-4" style={{fontSize :"25px", color:"white"}}>Log In</h2>
             <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
+              <Form.Label style={{ color:"white"}}>Email</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
             </Form.Group>
             <Form.Group id="password">
-              <Form.Label>Password</Form.Label>
+              <Form.Label style={{ color:"white"}}>Password</Form.Label>
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
             <Button disabled={loading} className="w-20" type="submit" style={{width:"50%",marginLeft: "90px",fontSize :"15px"}}>
               Log In
             </Button>
-            <div className="w-100 text-center mt-2" >
+            <div className="w-100 text-center mt-2" style={{ color:"white"}}>
         Need an account? <Link to="/SignUp">Sign Up</Link>
       </div>
-          </Form>
-          <div style={{width:"80%"}}>
-            <br>
-            </br>
-          <FacebookLogin 
+      </Form>  
+        <div> 
+          <br></br> 
+        <FacebookLogin 
         appId="3825163174199146" //APP ID NOT CREATED YET
         fields="name,email,picture"
         callback={responseFacebook}
-        
+        cssClass="loginBtn loginBtn--facebook"
         />
-      </div>
-      <br></br>
-       <div>
-      <GoogleLogin
+        
+        <GoogleLogin
         clientId="644415206269-8dtrmg5l216aueioc1sl64euocbls8ru.apps.googleusercontent.com" //CLIENTID NOT CREATED YET
         buttonText="LOGIN WITH GOOGLE"
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
-        
+        cssClass="loginBtn loginBtn--google"
       />
+        </div>
+        <div>
       </div>
+      
         </Card.Body>
       </Card>
+      </div>
+      <div style={{height:"100px"}}>
+        <br></br>
+        <br></br>
+        <br></br>
+
+      </div>
       </div>
   )
 }
