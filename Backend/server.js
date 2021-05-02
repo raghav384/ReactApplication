@@ -194,6 +194,21 @@ app.post('/api/blog_insertion', function(req, res) {
 });
 });
 
+app.get('/api/blog_retrieval', function(req, res) {
+	
+    connection(function(err,db2){
+        var dbo = db2.db("HealthScrollDB");
+        var query = {};
+        dbo.collection("blog_records").find(query).toArray(function(err, result) {
+            console.log(result)
+            if (err) throw err;
+            else res.send(result)
+            db2.close();
+    });
+});
+});
+
+
 app.post('/api/subscribe', function(req, res) {
 	if(req.session.loggedin)	req.session.destroy();
     var email_details = req.body;

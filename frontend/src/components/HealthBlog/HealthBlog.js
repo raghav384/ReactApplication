@@ -4,21 +4,6 @@ import { Editor } from "react-draft-wysiwyg";
 import {EditorState} from "draft-js";
 import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
-const Card= ({img,title,shortcontent,auther,date})=>{
-  return <div className=" blog-card container-fluid mt-3">
-      <a  href="" >
-      <h2>{title}</h2>
-      <img className="img-fluid" src={img} />
-      <p>{shortcontent}</p>
-      <div className="d-flex" style={{justifyContent:'space-between'}}>
-      <p>{date}</p>
-      <p>{auther}</p>
-      </div>
-
-      </a>
-  </div>
-}
-
 class HealthBlog extends React.Component {
   constructor() {
     super();
@@ -50,6 +35,7 @@ handleSubmit(event) {
       console.log("Helloji");
       const blog_to_post = this.state.input;
       console.log(blog_to_post);
+      blog_to_post["date"] = new Date();
       axios.post('http://localhost:8000/api/blog_insertion', { blog_to_post })
       .then(res => {
         console.log('res');
@@ -62,10 +48,15 @@ handleSubmit(event) {
         input["short_description"] = "";
         input["file_upload"] = "";
         input["blog_content"] ="";
-        this.state.editorState = EditorState.createEmpty();
-        this.setState({input:input});
-
-        alert('Blog Submitted successfully.');
+        axios.get('http://localhost:8000/api/blog_retrieval').then(res=>{
+        //console.log(res.data);
+        this.setState({blogs:res.data,input:input, editorState : EditorState.createEmpty()})
+        })
+        .catch(error=>{
+          this.setState({input:input, editorState : EditorState.createEmpty()});
+        })
+        
+        //alert('Blog Submitted successfully.');
 
       })
   }
@@ -117,8 +108,50 @@ seteditorState = (editorState) => {
     title:"Blog1" ,date:"3/25/2021"  ,auther:"user1", shortcontent:"In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the" ,img:"https://smmagencepro.com/wp-content/uploads/2020/02/How-blogs-changed-the-world-1024x585.jpg"
   }]);*/
   
+componentDidMount(){
+
+axios.get('http://localhost:8000/api/blog_retrieval').then(res=>{
+console.log(res.data);
+this.setState({blogs:res.data})
+
+})
+
+
+}
+
 render(){
- 
+  const styles = {
+    card: {
+      backgroundColor: '#B7E0F2',
+      borderRadius: 55,
+    },
+    cardImage: {
+      height: '20vh'
+    }
+    }
+  const renderCard = (card, index) => {
+    return (
+      <div class="card" style={{width: '500px'}}>  
+          <div class="card-body" style={{width: '500px', height: '100px'}}>
+            <h4 class="card-title">{card.blog_to_post.title}</h4>
+            <p class="card-text" style={{fontSize:'11px'}}>{card.blog_to_post.short_description}</p>
+            <p class="card-text"style={{fontSize:'11px'}}>{card.blog_to_post.blog_content}</p>
+          </div>
+      
+        <div class="card-footer" style={{backgroundColor:'#282A2B'}}>
+          <small class="text-muted" style={{color:'white'}}>By {card.blog_to_post.author} &nbsp; &nbsp; Last Updated {card.blog_to_post.date}  &nbsp; &nbsp; &nbsp; &nbsp; 
+          
+          </small>
+        </div>
+      </div>
+  
+    );
+    };
+
+
+
+
+
   return (
     <div className="container">
       <div className="col-lg-6">
@@ -175,9 +208,11 @@ render(){
       </div>
 
       
-      <div className="col-md-6 "> 
-        {this.state.blogs.map(x=> <Card img={x.img} shortcontent={x.shortcontent} title={x.title} date={x.date} auther={x.auther} />)}
-      </div>
+      <div className="col-md-6 " style={{marginTop:"10px"}}>
+    
+		    {this.state.blogs.map(renderCard)}
+	 
+ </div>
     </div>
 
   );
