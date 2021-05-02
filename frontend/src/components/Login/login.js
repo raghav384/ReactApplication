@@ -1,15 +1,14 @@
 import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
-//import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import './login.css';
 import axios from "axios";
+
 export default function Login() {
   const emailRef = useRef()
   const passwordRef = useRef()
- // const { login } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useHistory()

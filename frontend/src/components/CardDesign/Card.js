@@ -18,6 +18,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
+import {Link} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,7 +55,7 @@ export default function RecipeReviewCard(props) {
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            R
+            
           </Avatar>
         }
         action={
@@ -86,9 +87,13 @@ export default function RecipeReviewCard(props) {
         </CardContent>
 
         <CardContent>
-          
-      <Button variant="contained" color="primary" href={props.dataToPass.medicine_url}>
-  Link to Website </Button>
+         
+        <Link to={{ pathname:`/redirect/newb`, 
+                redirectUrl: "http://localhost:8000/api/getdata/pantocid", 
+                redirectTime: "3000",
+                destination_name:"" ,
+                destination_image_href: ""}}> Link to Vendor Website </Link>
+     
         </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
