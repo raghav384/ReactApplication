@@ -8,6 +8,8 @@ import Signup from './components/Login/Signup';
 import NewsComponent from './components/NewsSection/NewsComponent';
 import Redirect from './components/Redirect/redirect'
 import HealthBlog from './components/HealthBlog/HealthBlog';
+import Home from './components/pages/Home';
+
 class App extends React.Component {
 	render() {
 		return (
@@ -21,6 +23,7 @@ class App extends React.Component {
         <Route path='/login' component={login} />
         <Route path='/SignUp' component={Signup} />
         <Route path='/redirect' component={Redirect} />
+        <Route path='/' exact component={Home} />
       </Switch>
     </Router>
 			</div>
