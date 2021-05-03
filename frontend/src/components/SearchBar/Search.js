@@ -100,9 +100,19 @@ class Search extends Component {
 
 			
 	  const renderCard = (card, index) => {
-		  return (
+
+          var image_url = "";
+          if(card._id.vendor_name == "pharmeasy")     
+				image_url = "http://localhost:8000/api/image_retriever/pharmeasy.png";
+		  else
+		  		image_url = "http://localhost:8000/api/image_retriever/1mg.png";			
+	        
+			if(typeof(card.medicine_price)!="number"){
+				card.medicine_price = "Data Not Found"
+			}	  
+			return (
 			<Card style={{ width: "18rem" }} key={index} className="box">
-			<Demo dataToPass = {card}  />
+			<Demo dataToPass = {card}  image_url = {image_url}  />
 			</Card>
 		  );
 		};
