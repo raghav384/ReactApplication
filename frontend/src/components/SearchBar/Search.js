@@ -199,7 +199,7 @@ render() {
 					/>
 				</div>
 				<div class="SearchButton">
-					<button onClick={this.Search.bind(this)} class="button-style">Search</button>
+					<button onClick={this.Search.bind(this)} class="button-style1">Search</button>
 				</div>
 				<div class="Vendors">
 					<table class="vendor_table_styling">
@@ -222,8 +222,8 @@ render() {
 			
           	</div>
         	</Fragment>
-    
-			
+			<br></br><br></br><br></br><br></br><br></br><br></br>
+			<br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
 		</div>
 	)
 }

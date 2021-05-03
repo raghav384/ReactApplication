@@ -8,6 +8,8 @@ input {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width:100%;
+    margin-top: auto
   }
   
   .footer-subscription {
@@ -16,9 +18,9 @@ input {
     justify-content: center;
     align-items: center;
     text-align: center;
-  
-    margin-bottom: 24px;
-    padding: 24px;
+    
+    margin-bottom: 8px;
+    padding: 0px;
     color: rgb(255,255,255);
   }
   
@@ -28,7 +30,7 @@ input {
   }
   
   .footer-subscription-heading {
-    margin-bottom: 24px;
+    margin-bottom: 8px;
     font-size: 24px;
   }
   
@@ -38,13 +40,13 @@ input {
   }
   
   .footer-input {
-    padding: 8px 20px;
+    padding: 0px;
     border-radius: 2px;
     margin-right: 10px;
     outline: none;
     border: none;
     font-size: 18px;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
     border: 1px solid #fff;
     color:rgb(0,0,0);
   }
@@ -73,11 +75,11 @@ input {
       background-color: #099e53; /* Green */
       border: none;
       color: rgb(255, 255, 255);
-      padding: 8px;
+      padding: 2px;
       text-align: center;
       text-decoration:solid;
       display: inline-block;
-      font-size: 22px;
+      font-size: 20px;
     }
   
   

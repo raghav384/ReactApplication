@@ -57,7 +57,7 @@ export default function Login() {
 }
 
   return (
-    <div className="container-fluid" style={{ backgroundColor:"#43f7ca"}}>
+    <div>
       <div >
       <Card style={{ maxWidth: "400px" ,marginLeft :"500px",marginTop: "100px",backgroundColor:"#323635",borderRadius:"15px",fontSize :"large" }}>
         <Card.Body>

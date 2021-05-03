@@ -9,10 +9,27 @@ import NewsComponent from './components/NewsSection/NewsComponent';
 import Redirect from './components/Redirect/redirect';
 import HealthBlog from './components/HealthBlog/HealthBlog';
 import Home from './components/pages/Home';
+import Footer from './components/Footer'
+
 class App extends React.Component {
 	render() {
 		return (
 			<div>
+        
+        <video autoPlay loop muted play 
+          style={{
+            position:"absolute",
+            width:"100%",
+            top:"9%",
+            height:"100%",
+            objectFit:"cover",
+            transform:"tranlate(-50%,-50%)",
+            zIndex:-10
+            
+            }}>
+          <source src='video1.mp4' type='video/mp4'  />
+          </video>
+          
 	<Router>
       <Navbar />
       <Switch>
@@ -25,6 +42,7 @@ class App extends React.Component {
       	<Route path='/' exact component={Home} />		
 
       </Switch>
+      <Footer />
     </Router>
 			</div>
 		);
