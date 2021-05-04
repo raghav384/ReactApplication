@@ -56,7 +56,7 @@ const renderCard = (card, index) => {
 		<div class="card" style={{width: '900px'}}>
 			<div class="card-horizontal" >
 				<div class="img-square-wrapper" style={{width: '300px',height:'150px'}}>
-					<img  src={card.urlToImage}  style={{width:'100%',height:'100%'}}alt="Card image cap"/>
+					<img  src={card.urlToImage}  style={{width:'100%',height:'100%'}}alt="Not found"/>
 				</div>
 				<div class="card-body" style={{width: '600px', height: '150px'}}>
 					<h4 class="card-title">{card.title}</h4>

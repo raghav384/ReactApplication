@@ -40,10 +40,14 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     backgroundColor: red[500],
-  },
+  }
 }));
 
 export default function RecipeReviewCard(props) {
+
+   
+
+
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -51,23 +55,23 @@ export default function RecipeReviewCard(props) {
     setExpanded(!expanded);
   };
   return (
-   // const vendor_name = {props.dataToPass._id.vendor_name}
-
+   
+   
   <Card className={classes.root}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
+      <CardHeader 
+        // avatar={
+        //   <Avatar aria-label="recipe" className={classes.avatar}>
             
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
+        //   </Avatar>
+        //}
+        // action={
+        //   <IconButton aria-label="settings">
+        //     <MoreVertIcon />
+        //   </IconButton>
+        // }
         title= {props.dataToPass._id.medicine_name}
         subheader= {props.dataToPass._id.vendor_name}
-        
+                
         
       />
       {/* <CardMedia
@@ -93,19 +97,19 @@ export default function RecipeReviewCard(props) {
         <CardContent>
          
         <Link to={{ pathname:`/redirect/newb`, 
-                redirectUrl: "http://localhost:8000/api/getdata/pantocid", 
+                redirectUrl :  props.dataToPass.medicine_url , 
                 redirectTime: "3000",
-                destination_name:"" ,
-                destination_image_href: ""}}> Link to Vendor Website </Link>
+                destination_name: props.dataToPass._id.vendor_name ,
+                destination_image_href: props.image_url}}> Link to Vendor Website </Link>
      
         </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        <IconButton aria-label="share">
+        {/* <IconButton aria-label="share">
           <ShareIcon />
-        </IconButton>
+        </IconButton> */}
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
