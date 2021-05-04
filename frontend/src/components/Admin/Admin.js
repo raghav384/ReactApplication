@@ -12,12 +12,12 @@ class Admin extends React.Component {
 
 ChangeStatusApprove(object){
     console.log(object);
-     var link = 'http://localhost:8000/api/' + 'blog_status_update/' + String(object._id)+ '/' + 'Approve';   
+     var link = 'http://localhost:8000/api/' + 'blog_status_update/' + String(object._id)+ '/' + 'approved';   
     axios.post(link).then(res=>{
-        console.log("Succesfully Updated ");
+        console.log("Succesfully Updated Status to approved ");
         
         
-        axios.get('http://localhost:8000/api/blog_retrieval').then(res=>{
+        axios.get('http://localhost:8000/api/blog_retrieval/pending_for_review').then(res=>{
             //console.log(res.data);
             this.setState({blogs:res.data})
         })
@@ -27,11 +27,11 @@ ChangeStatusApprove(object){
    };
 ChangeStatusReject(object){
     console.log(object);
-     var link = 'http://localhost:8000/api/' + 'blog_status_update/' + String(object._id)+ '/' + 'Reject';   
+     var link = 'http://localhost:8000/api/' + 'blog_status_update/' + String(object._id)+ '/' + 'rejected';   
     axios.post(link).then(res=>{
-        console.log("Succesfully Updated ");
+        console.log("Succesfully Updated Status to Rejected");
     })
-    axios.get('http://localhost:8000/api/blog_retrieval').then(res=>{
+    axios.get('http://localhost:8000/api/blog_retrieval/pending_for_review').then(res=>{
         //console.log(res.data);
         this.setState({blogs:res.data})
     })
@@ -41,7 +41,7 @@ ChangeStatusReject(object){
    
 componentDidMount(){
 
-axios.get('http://localhost:8000/api/blog_retrieval').then(res=>{
+axios.get('http://localhost:8000/api/blog_retrieval/pending_for_review').then(res=>{
 console.log(res.data);
 var output = [];
 for (var i =0 ;i <res.data.length;i++){
