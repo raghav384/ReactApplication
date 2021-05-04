@@ -195,11 +195,13 @@ app.post('/api/blog_insertion', function(req, res) {
 });
 });
 
-app.get('/api/blog_retrieval', function(req, res) {
+app.get('/api/blog_retrieval/:status', function(req, res) {
 	
     connection(function(err,db2){
         var dbo = db2.db("HealthScrollDB");
-        var query = {};
+        var status_received = req.params.status;
+        var query ={ "status" : status_received };
+        
         dbo.collection("blog_records").find(query).toArray(function(err, result) {
             console.log(result)
             if (err) throw err;
@@ -213,8 +215,7 @@ app.get('/api/blog_retrieval', function(req, res) {
 app.post('/api/subscribe', function(req, res) {
 	if(req.session.loggedin)	req.session.destroy();
     var email_details = req.body;
-    console.log(email_details);
-
+    
     connection(function(err,db2){
         var dbo = db2.db("HealthScrollDB");
         dbo.collection("email_records").insertOne(email_details, function(err,result) {
@@ -224,6 +225,28 @@ app.post('/api/subscribe', function(req, res) {
         db2.close();
     });
 });
+});
+
+var ObjectID =require('mongodb').ObjectID;
+app.post('/api/blog_status_update/:objectId/:action', function(req, res) {
+	if(req.session.loggedin)	req.session.destroy();
+    var action_required = req.params.action;
+    var objectId_received = req.params.objectId;
+    var query ={ "_id" : ObjectID(objectId_received) };
+    const update ={$set: {"status":action_required}};
+    const options = { "upsert": false };
+    
+    connection(function(err,db2){
+        var dbo = db2.db("HealthScrollDB");
+       dbo.collection("blog_records").updateOne(query, update, options)
+        .then(result => {
+          const { matchedCount, modifiedCount } = result;
+          console.log(`Successfully matched ${matchedCount} and modified ${modifiedCount} items.`);
+          res.send(result);
+        });
+        db2.close();
+    });
+
 });
 
 

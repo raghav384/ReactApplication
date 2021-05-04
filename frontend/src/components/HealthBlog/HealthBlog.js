@@ -110,7 +110,7 @@ seteditorState = (editorState) => {
   
 componentDidMount(){
 
-axios.get('http://localhost:8000/api/blog_retrieval').then(res=>{
+axios.get('http://localhost:8000/api/blog_retrieval/approved').then(res=>{
 console.log(res.data);
 this.setState({blogs:res.data})
 

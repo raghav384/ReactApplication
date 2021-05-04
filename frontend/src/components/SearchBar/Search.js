@@ -102,7 +102,7 @@ class Search extends Component {
 	  const renderCard = (card, index) => {
 
           var image_url = "";
-          if(card._id.vendor_name == "pharmeasy")     
+          if(card._id.vendor_name == "pharmEasy")     
 				image_url = "http://localhost:8000/api/image_retriever/pharmeasy.png";
 		  else
 		  		image_url = "http://localhost:8000/api/image_retriever/1mg.png";			
