@@ -161,7 +161,8 @@ app.post('/api/authenticate_user', function(req, res) {
 app.post('/api/register_user/:query', function(req, res) {
 	if(req.session.loggedin)	req.session.destroy();
     var source = req.params.query;
-    var user_details = req.body;
+    console.log(req.body.profileObj);
+    var user_details = req.body.profileObj;
     user_details["insertion_source"] = source;
 
     connection(function(err,db2){

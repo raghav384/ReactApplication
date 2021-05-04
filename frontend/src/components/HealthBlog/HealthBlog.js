@@ -153,9 +153,13 @@ render(){
 
 
   return (
-    <div className="container">
-      <div className="col-lg-6">
-        
+    <div className="container" >
+      <div className="col-lg-6" >
+      
+       <div style={{margin:"0 auto",  width:"500px", padding:"20px",
+       background:"#f9f9f9",
+        border:"2px solid #333",
+        marginTop:"20px"}} >
         <form onSubmit={this.handleSubmit}>
         <br></br>
         <br></br>
@@ -205,7 +209,10 @@ render(){
         <br></br><br></br><br></br><br></br><br></br>
         <input type="submit" value="Submit" className="btn btn-success"></input>
         </form>
+        </div>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
       </div>
+      
 
       
       <div className="col-md-6 " style={{marginTop:"10px"}}>

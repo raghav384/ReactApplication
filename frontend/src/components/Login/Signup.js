@@ -50,8 +50,9 @@ export default function Signup() {
   }
 
   return (
-    <div className="container-fluid" style={{backgroundColor:"#43f7ca"}}>
+    <div >
       <div >
+        
       <Card style={{ maxWidth: "400px" ,marginLeft :"500px",marginTop:"50px",backgroundColor:"#323635",borderRadius:"15px",fontSize :"large" }}>
         <Card.Body>
           <h2 className="text-center mb-4" style={{fontSize :"25px",color:"white"}}>Sign Up</h2>
