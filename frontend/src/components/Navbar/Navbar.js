@@ -43,7 +43,9 @@ const Navbar = () => {
           <NavLink to='/login' activeStyle  style = {{fontSize: "20px" }}>
             <i class="fa fa-sign-in" aria-hidden="true"></i> &nbsp;&nbsp;Login
           </NavLink>
-
+          <NavLink to='/Admin' activeStyle  style = {{fontSize: "20px" }}>
+             &nbsp;&nbsp;Admin
+          </NavLink>
         </NavMenu>
       </Nav>
     </>

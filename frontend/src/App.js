@@ -10,7 +10,7 @@ import Redirect from './components/Redirect/redirect';
 import HealthBlog from './components/HealthBlog/HealthBlog';
 import Home from './components/pages/Home';
 import Footer from './components/Footer'
-
+import Admin from './components/Admin/Admin';
 class App extends React.Component {
 	render() {
 		return (
@@ -39,6 +39,7 @@ class App extends React.Component {
         <Route path='/login' component={login} />
         <Route path='/SignUp' component={Signup} />
         <Route path='/redirect/:id' component={Redirect} />
+        <Route path='/Admin' component={Admin} />
       	<Route path='/' exact component={Home} />		
 
       </Switch>
