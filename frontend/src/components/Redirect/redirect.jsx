@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Lottie from "react-lottie";
 import Animation from '../../animations/9513-preloader.json'
 import './redirect.css';
+import axios from 'axios';
 
 class Redirect extends Component {
     defaultOptions = {
@@ -17,13 +18,22 @@ class Redirect extends Component {
 };
    
 componentDidMount() {
+    
     const { history } = this.props;
     console.log(this.props.location.sampleParam);
 
-setTimeout(() => {
+    setTimeout(() => {
     window.location.replace(this.props.location.redirectUrl)
     }, this.props.location.redirectTime);
-    }
+    
+
+    axios.post('http://localhost:8000/api/redirection_count_increase').then(res=>{
+       
+    })
+    
+    
+
+}
 
 render() {
     return (
