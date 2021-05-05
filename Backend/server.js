@@ -250,3 +250,56 @@ app.post('/api/blog_status_update/:objectId/:action', function(req, res) {
 });
 
 
+app.get('/api/medicine_vendor_count', function(req, res) {
+
+        connection(function(err,db2){
+        var dbo = db2.db("HealthScrollDB");
+        dbo.collection("medicine_records").distinct('vendor_name', function(err, result) {
+            if (err) throw err;
+            else res.json(result.length); 
+            db2.close();
+        });
+       
+    });
+});
+
+app.get('/api/user_count', function(req, res) {
+	
+        connection(function(err,db2){
+        var dbo = db2.db("HealthScrollDB");
+        dbo.collection("login_records").find({}).toArray(function(err, result) {
+            if (err) throw err;
+            else res.json(result.length); 
+            db2.close();
+        });
+       
+    });
+});
+
+app.get('/api/subscriber_count', function(req, res) {
+	
+        connection(function(err,db2){
+        var dbo = db2.db("HealthScrollDB");
+        dbo.collection("email_records").distinct('email',function(err, result) {
+            if (err) throw err;
+            else res.json(result.length); 
+            db2.close();
+        });
+       
+    });
+});
+
+app.get('/api/blog_count/:status', function(req, res) {
+
+        var status_received = req.params.status;
+        connection(function(err,db2){
+        var dbo = db2.db("HealthScrollDB");
+        dbo.collection("blog_records").find({"status":status_received}).toArray(function(err, result) {
+            console.log(result.length);
+            if (err) throw err;
+            else res.json(result.length); 
+            db2.close();
+        });
+       
+    });
+});
