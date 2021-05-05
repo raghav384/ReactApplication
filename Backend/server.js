@@ -211,6 +211,37 @@ app.get('/api/blog_retrieval/:status', function(req, res) {
 });
 });
 
+app.get('/api/redirection',function(req,res){
+    connection(function(err,db2){
+        var dbo = db2.db("HealthScrollDB");
+        var status_received = req.params.status;
+        var query ={ "status" : status_received };
+        
+        dbo.collection("blog_records").find(query).toArray(function(err, result) {
+            console.log(result)
+            if (err) throw err;
+            else res.send(result)
+            db2.close();
+    });  
+
+
+})
+
+app.post('/api/redirection_count_increase',function(req,res){
+    connection(function(err,db2){
+        var dbo = db2.db("HealthScrollDB");
+        var status_received = req.params.status;
+        var query ={ "status" : status_received };
+        
+        dbo.collection("blog_records").find(query).toArray(function(err, result) {
+            console.log(result)
+            if (err) throw err;
+            else res.send(result)
+            db2.close();
+    });
+});
+})
+
 
 app.post('/api/subscribe', function(req, res) {
 	if(req.session.loggedin)	req.session.destroy();
