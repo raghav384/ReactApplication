@@ -7,11 +7,31 @@ import login from './components/Login/login';
 import Signup from './components/Login/Signup';
 import NewsComponent from './components/NewsSection/NewsComponent';
 import Redirect from './components/Redirect/redirect';
-import HealthBlog from './components/HealthBlog/HealthBlog';
+import BlogCreation from './components/HealthBlog/BlogCreation';
 import Home from './components/pages/Home';
 import Footer from './components/Footer'
 import Admin from './components/Admin/Admin';
+import LoginSignup from './components/Authentication/LoginSignup';
+import BlogDisplay from './components/HealthBlog/BlogDisplay';
 class App extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      loggedInStatus: "NOT_LOGGED_IN",
+      user: {}
+    }
+    this.handleLogin = this.handleLogin.bind(this);
+    
+  }
+
+handleLogin(data){
+  this.setState({
+    loggedInStatus:"LOGGED_IN",
+    user:data.user
+  })
+}
+
 	render() {
 		return (
 			<div>
@@ -29,19 +49,29 @@ class App extends React.Component {
             }}>
           <source src='video1.mp4' type='video/mp4'  />
           </video>
+
+         
           
-	<Router>
-      <Navbar />
+	<Router> 
+  <Navbar loggedInStatus ={this.state.loggedInStatus} />
       <Switch>
-        <Route path='/HealthBlog' component={HealthBlog} />
+        <Route path='/blogCreation' component={BlogCreation} />
         <Route path='/NewsSection' component={NewsComponent} />
         <Route path='/MedicineSearch' component={Search} />
         <Route path='/login' component={login} />
         <Route path='/SignUp' component={Signup} />
         <Route path='/redirect/:id' component={Redirect} />
+        <Route path='/blogDisplay'component={BlogDisplay} />
         <Route path='/Admin' component={Admin} />
-      	<Route path='/' exact component={Home} />		
-
+      	<Route exact path={"/"}
+        render= {props => (
+          <Home {...props} loggedInStatus={this.state.loggedInStatus} />
+        )	}/>
+        <Route 
+        path={"/loginSignup"}
+        render={props =>(
+        <LoginSignup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />) }/>
+      
       </Switch>
       <Footer />
     </Router>

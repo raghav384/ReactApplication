@@ -28,7 +28,7 @@ export default function Signup() {
       "email" : emailRef.current.value,
       "password" : passwordRef.current.value,
       "confirmPassword": passwordConfirmRef.current.value
-    })
+    },{ withCredentials:true })
     .then(response => {
       if(response)
         console.log(response)
