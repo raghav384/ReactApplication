@@ -15,6 +15,12 @@ class BlogApproval extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
+    closeFeedback(){
+        this.setState({
+            show_feedback:false
+        })
+    }
+
     submitFeedback(){
          
         console.log(this.state.input,"grhfxghjhghftrhghcyhg")
@@ -146,8 +152,9 @@ class BlogApproval extends React.Component {
             <div className="container" style={{ height: '500px' }}>
       
                 <div className="col-lg-6 " style={{ marginTop: "40px" }}>
-
+                {this.state.blogs.length>0? 
                 <Button size="lg" variant="info" style={{marginLeft:'85px'}} disabled>Pending Blogs for Approval</Button>
+                :null}
                 <br></br>
                 
                     {this.state.blogs.map(renderCard)}
@@ -209,7 +216,7 @@ class BlogApproval extends React.Component {
                                     {this.state.show_feedback?
                                     <div style={{backgroundColor:'#DEDEDE',height:'130px',padding:'5px'}}>
                                  
-                                  <button type="button" onClick={() => this.submitFeedback()} class="close" aria-label="Close">
+                                  <button type="button" onClick={() => this.closeFeedback()} class="close" aria-label="Close">
   <span style={{fontSize:'20px'}} aria-hidden="true">&times;</span>
 </button>                                           
 
