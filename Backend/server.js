@@ -141,16 +141,20 @@ app.listen(port,function(){
 app.post('/api/authenticate_user', function(req, res) {
 
 	if(req.session.loggedin)	req.session.destroy();
-	var visitor_email=req.body.email;
-    var visitor_password=req.body.password;
+	var visitor_email=req.body.user.email;
+    var visitor_password=req.body.user.password;
+    console.log(visitor_email);
+    console.log(visitor_password);
 
     connection(function(err,db2){
         var dbo = db2.db("HealthScrollDB");
-        var query = { email:visitor_email, password:visitor_password };
+        var query = { "user.email":visitor_email, "user.password":visitor_password };
         dbo.collection("login_records").find(query).toArray(function(err, result) {
             if (err) throw err;
             console.log("No of records found: ",result.length);
-            if(result.length == 1) res.send("User Credentials exists");
+            console.log(result[0]);
+            if(result.length == 1) 
+            res.send(result[0]);
             else res.send("user_not_found");
             db2.close();
     });
@@ -176,6 +180,24 @@ app.post('/api/register_user/:query', function(req, res) {
 
 });
 });
+
+app.post('/api/register_website_user', function(req, res) {
+	if(req.session.loggedin)	req.session.destroy();
+    var user_details = req.body;
+    console.log(user_details);
+
+    connection(function(err,db2){
+        var dbo = db2.db("HealthScrollDB");
+        dbo.collection("login_records").insertOne(user_details, function(err,result) {
+        if (err) throw err;
+        console.log("User details succesfully inserted into MongoDB Instance");
+        res.send(req.body);
+        db2.close();
+    });
+
+});
+});
+
 
 app.post('/api/blog_insertion', function(req, res) {
 	if(req.session.loggedin)	req.session.destroy();
@@ -276,6 +298,26 @@ app.post('/api/blog_status_update/:objectId/:action', function(req, res) {
 
 });
 
+app.post('/api/blog_feedback_insertion/:objectId/:feedback_string', function(req, res) {
+	if(req.session.loggedin)	req.session.destroy();
+    var feedback_received = req.params.feedback_string;
+    var objectId_received = req.params.objectId;
+    var query ={ "_id" : ObjectID(objectId_received) };
+    const update ={$set: {"feedback_received":feedback_received,"status":"feedback_received"}};
+    const options = { "upsert": false };
+    
+    connection(function(err,db2){
+        var dbo = db2.db("HealthScrollDB");
+       dbo.collection("blog_records").updateOne(query, update, options)
+        .then(result => {
+          const { matchedCount, modifiedCount } = result;
+          console.log(`Successfully matched ${matchedCount} and modified ${modifiedCount} items.`);
+          res.send(result);
+        });
+        db2.close();
+    });
+
+});
 
 app.get('/api/medicine_vendor_count', function(req, res) {
 
@@ -329,4 +371,21 @@ app.get('/api/blog_count/:status', function(req, res) {
         });
        
     });
+});
+
+app.post('/api/vendor_details_insertion', function(req, res) {
+	if(req.session.loggedin)	req.session.destroy();
+    var vendor_details = req.body;
+    console.log(vendor_details);    
+
+    connection(function(err,db2){
+        var dbo = db2.db("HealthScrollDB");
+        dbo.collection("vendor_api_details").insertOne(vendor_details, function(err,result) {
+        if (err) throw err;
+        console.log("Vendor API Details succesfully inserted into MongoDB Instance");
+        res.send("Vendor API Deatails Successfully Submitted");
+        db2.close();
+    });
+
+});
 });

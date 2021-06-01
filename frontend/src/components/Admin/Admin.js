@@ -16,9 +16,12 @@ class Admin extends React.Component {
      total_blog_rejected : 0,
      total_news : 0
     };
+    this.onSubmit = this.onSubmit.bind(this);
 }
 
-
+onSubmit(){
+  console.log("HelloWorld");
+}
 ChangeStatusApprove(object){
     console.log(object);
      var link = 'http://localhost:8000/api/' + 'blog_status_update/' + String(object._id)+ '/' + 'approved';   
@@ -278,24 +281,24 @@ render(){
         <br></br> 
         <div className="row" style={{height:"250px",backgroundColor:"whitesmoke"}}>
             
-            <h2 style={{textAlign:"center",marginLeft:"150px",marginTop:"10px",textDecoration:"underline"}}> Vendor API MANAGEMENT </h2>
+            <h2 style={{textAlign:"center",marginLeft:"150px",marginTop:"10px",textDecoration:"underline"}}> Vendor API Management Console </h2>
             <br></br>
             <form style={{marginRight:"40px",marginLeft:"100px",marginTop:"10px",fontSize:"10px"}}>
        
         <div className="form-group">
-         <label for="company_name">Company Name: </label> 
+         <label for="vendor_name">Vendor Name: </label> 
             <input className="form-control" 
               type="text"
-              name="company_name"
-              placeholder="Enter Name"
-              id="company_name" style={{width:"340px"}}/></div>    
+              name="vendor_name"
+              placeholder="Enter Vendor Name"
+              id="vendor_name" style={{width:"340px"}}/></div>    
       <div className="form-group">
-            <label for="api_description">API Description</label>
+            <label for="api_url">API base url</label>
             <input className="form-control" 
               type="text"
-              name="api_description"
-              placeholder="Enter API Description"
-              id="api_description" /></div> 
+              name="api_base_url"
+              placeholder="Enter API base url"
+              id="api_base_url" /></div> 
           <div className="form-group">
             <label for="api">API Details</label>
               <input className="form-control" 
@@ -304,7 +307,22 @@ render(){
                 placeholder="Enter the API"
                 id="api" /> 
           </div>
-        <input type="submit" value="Submit" className="btn btn-success"></input>
+          <div className="form-group">
+            <label for="product_id_start">Product ID Start</label>
+            <input className="form-control" 
+              type="text"
+              name="product_id_start"
+              placeholder="Enter starting value of product id"
+              id="product_id_start" /></div> 
+          <div className="form-group">
+            <label for="product_id_ends">Product ID End</label>
+              <input className="form-control" 
+                type="text"
+                name="product_id_end"
+                placeholder="Enter the end value of product id"
+                id="product_id_end" /> 
+          </div>
+        <input type="submit" onClick ={this.onSubmit}  value="Submit" className="btn btn-success"></input>
         </form>
             
 
