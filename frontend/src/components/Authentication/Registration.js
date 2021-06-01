@@ -28,7 +28,8 @@ handleSubmit(event) {
          firstName: this.state.firstName,
          lastName: this.state.lastName,
          password: this.state.password,
-         email:this.state.user_email   
+         email:this.state.user_email,
+         isAdmin: false   
      }
     },{ withCredentials:false })
     .then(response => {

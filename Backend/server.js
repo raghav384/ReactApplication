@@ -143,8 +143,6 @@ app.post('/api/authenticate_user', function(req, res) {
 	if(req.session.loggedin)	req.session.destroy();
 	var visitor_email=req.body.user.email;
     var visitor_password=req.body.user.password;
-    console.log(visitor_email);
-    console.log(visitor_password);
 
     connection(function(err,db2){
         var dbo = db2.db("HealthScrollDB");
