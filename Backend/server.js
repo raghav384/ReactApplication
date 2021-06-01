@@ -432,3 +432,21 @@ app.post('/api/vendor_details_insertion', function(req, res) {
 
 });
 });
+
+
+app.get('/api/blog_retrieval_by_email/:user_email/:status', function(req, res) {
+	
+    connection(function(err,db2){
+        var dbo = db2.db("HealthScrollDB");
+        var status_received = req.params.status;
+        var user_email = req.params.user_email;
+        var query ={ "blog_to_post.email": user_email,"status" : status_received };
+        
+        dbo.collection("blog_records").find(query).toArray(function(err, result) {
+            console.log(result)
+            if (err) throw err;
+            else res.send(result)
+            db2.close();
+    });
+});
+});

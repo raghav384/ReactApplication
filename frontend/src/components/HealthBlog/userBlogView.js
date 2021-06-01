@@ -5,8 +5,8 @@ import {EditorState} from "draft-js";
 import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import {Button,Row,Col,ButtonGroup} from "react-bootstrap";
 class userBlogView extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       input: {},
       errors: {},
@@ -21,7 +21,7 @@ class userBlogView extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
+  
   handleChange(event) {
     let input = this.state.input;
     let errors=this.state.errors;
@@ -47,7 +47,9 @@ handleSubmit(event) {
         console.log(res);
         console.log(res.data);
         
-        axios.get('http://localhost:8000/api/blog_retrieval/approved').then(res=>{
+        let email = this.props.user_details.email;
+        let approved_url = "http://localhost:8000/api/blog_retrieval_by_email/"+ email+"/approved";        
+        axios.get(approved_url).then(res=>{
         //console.log(res.data);
         this.setState({blogs:res.data,
             input: {},
@@ -115,18 +117,13 @@ seteditorState = (editorState) => {
     return isValid;
 
   }
-  //const [editorState, seteditorState] = React.useState();
-  /*const [blogs,setblogs]=React.useState([{
-    title:"Blog1" ,date:"3/25/2021"  ,auther:"user1", shortcontent:"In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the" ,img:"https://smmagencepro.com/wp-content/uploads/2020/02/How-blogs-changed-the-world-1024x585.jpg"},
-  {
-    title:"Blog1" ,date:"3/25/2021"  ,auther:"user1", shortcontent:"In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the" ,img:"https://smmagencepro.com/wp-content/uploads/2020/02/How-blogs-changed-the-world-1024x585.jpg"
-  },{
-    title:"Blog1" ,date:"3/25/2021"  ,auther:"user1", shortcontent:"In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the" ,img:"https://smmagencepro.com/wp-content/uploads/2020/02/How-blogs-changed-the-world-1024x585.jpg"
-  }]);*/
-  
+
 componentDidMount(){
 
-axios.get('http://localhost:8000/api/blog_retrieval/approved').then(res=>{
+let email = this.props.user_details.email;
+let approved_url = "http://localhost:8000/api/blog_retrieval_by_email/"+ email+"/approved";     
+console.log(approved_url);
+axios.get(approved_url).then(res=>{
 console.log(res.data);
 this.setState({blogs:res.data})
 
@@ -135,7 +132,9 @@ this.setState({blogs:res.data})
 
 
 getApprove = () =>{
-    axios.get('http://localhost:8000/api/blog_retrieval/approved').then(res=>{
+        let email = this.props.user_details.email;
+        let approved_url = "http://localhost:8000/api/blog_retrieval_by_email/"+ email+"/approved";     
+        axios.get(approved_url).then(res=>{
         console.log(res.data);
         this.setState({blogs:res.data,
             input: {},
@@ -148,7 +147,9 @@ getApprove = () =>{
         })
 }
 getRejected = () =>{
-    axios.get('http://localhost:8000/api/blog_retrieval/rejected').then(res=>{
+    let email = this.props.user_details.email;
+    let rejected_url = "http://localhost:8000/api/blog_retrieval_by_email/"+ email+"/rejected";     
+    axios.get(rejected_url).then(res=>{
         console.log(res.data);
         this.setState({blogs:res.data,
             input: {},
@@ -160,7 +161,10 @@ getRejected = () =>{
         })
 }
 getPending = () =>{
-    axios.get('http://localhost:8000/api/blog_retrieval/pending_for_review').then(res=>{
+    let email = this.props.user_details.email;
+    let pendingreview_url = "http://localhost:8000/api/blog_retrieval_by_email/"+ email +"/pending_for_review"; 
+    console.log(pendingreview_url)    
+    axios.get(pendingreview_url).then(res=>{
         console.log(res.data);
         this.setState({blogs:res.data,
             input: {},
@@ -172,7 +176,9 @@ getPending = () =>{
         })
 }
 getFeedback = () =>{
-    axios.get('http://localhost:8000/api/blog_retrieval/feedback_received').then(res=>{
+    let email = this.props.user_details.email;
+    let feedbackreceived_url = "http://localhost:8000/api/blog_retrieval_by_email/"+ email+"/feedback_received";     
+    axios.get(feedbackreceived_url).then(res=>{
         console.log(res.data);
         this.setState({blogs:res.data,
             input: {},
