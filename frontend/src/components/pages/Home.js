@@ -1,18 +1,20 @@
 import React from 'react';
+import { Component } from 'react';
 import '../../App.css';
 import FrontSection from '../FrontSection';
 
+export default class Home extends Component{
+constructor(props) {
+  super(props);
+}
 
-
-function Home() {
+render(){
+  console.log(this.props.loggedInStatus)
   return (
     <>
       <FrontSection/>
-     
-
-
+  
     </>
   );
 }
-
-export default Home;
+}

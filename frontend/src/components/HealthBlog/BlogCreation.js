@@ -4,13 +4,12 @@ import { Editor } from "react-draft-wysiwyg";
 import {EditorState} from "draft-js";
 import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
-class HealthBlog extends React.Component {
-  constructor() {
-    super();
+class BlogCreation extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
       input: {},
       errors: {},
-      blogs: [],
       editorState: EditorState.createEmpty()
     };
   
@@ -34,27 +33,20 @@ handleSubmit(event) {
   if(this.validate()){
       
       const blog_to_post = this.state.input;
-      console.log(blog_to_post);
+      const author = this.props.user_details.firstName + " "+ this.props.user_details.lastName;
+      const email = this.props.user_details.email;
       blog_to_post["date"] = new Date();
+      blog_to_post["author"]= author;
+      blog_to_post["email"] = email;
+      console.log(blog_to_post);
       axios.post('http://localhost:8000/api/blog_insertion', { blog_to_post })
       .then(res => {
-        console.log('res');
-        console.log(res);
-        console.log(res.data);
         
         let input = {};
         input["title"] = "";
-        input["author"] = "";
         input["short_description"] = "";
         input["file_upload"] = "";
         input["blog_content"] ="";
-        axios.get('http://localhost:8000/api/blog_retrieval/approved').then(res=>{
-        //console.log(res.data);
-        this.setState({blogs:res.data,input:input, editorState : EditorState.createEmpty()})
-        })
-        .catch(error=>{
-          this.setState({input:input, editorState : EditorState.createEmpty()});
-        })
         
         alert('Blog Submitted successfully.');
 
@@ -82,11 +74,6 @@ seteditorState = (editorState) => {
       errors["title"] = "Please enter your title.";
     }
 
-    if (!input["author"]) {
-      isValid = false;
-      errors["author"] = "Please enter your full name.";
-    }
-
     if (!input["short_description"]) {
       isValid = false;
       errors["short_description"] = "Please enter short description for your blog.";
@@ -107,50 +94,8 @@ seteditorState = (editorState) => {
   },{
     title:"Blog1" ,date:"3/25/2021"  ,auther:"user1", shortcontent:"In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the" ,img:"https://smmagencepro.com/wp-content/uploads/2020/02/How-blogs-changed-the-world-1024x585.jpg"
   }]);*/
-  
-componentDidMount(){
-
-axios.get('http://localhost:8000/api/blog_retrieval/approved').then(res=>{
-console.log(res.data);
-this.setState({blogs:res.data})
-
-})
-
-
-}
 
 render(){
-  const styles = {
-    card: {
-      backgroundColor: '#B7E0F2',
-      borderRadius: 55,
-    },
-    cardImage: {
-      height: '20vh'
-    }
-    }
-  const renderCard = (card, index) => {
-    return (
-      <div class="card" style={{width: '500px'}}>  
-          <div class="card-body" style={{width: '500px', height: '100px'}}>
-            <h4 class="card-title">{card.blog_to_post.title}</h4>
-            <p class="card-text" style={{fontSize:'11px'}}>{card.blog_to_post.short_description}</p>
-            <p class="card-text"style={{fontSize:'11px'}}>{card.blog_to_post.blog_content}</p>
-          </div>
-      
-        <div class="card-footer" style={{backgroundColor:'#282A2B'}}>
-          <small class="text-muted" style={{color:'white'}}>By {card.blog_to_post.author} &nbsp; &nbsp; Last Updated {card.blog_to_post.date}  &nbsp; &nbsp; &nbsp; &nbsp; 
-          
-          </small>
-        </div>
-      </div>
-  
-    );
-    };
-
-
-
-
 
   return (
     <div className="container" >
@@ -174,17 +119,6 @@ render(){
               id="title" />
 
               <div className="text-danger">{this.state.errors.title}</div></div>    
-      
-      <div className="form-group">
-            <label for="author">Author:</label>
-            <input className="form-control" 
-              type="text"
-              name="author"
-              value={this.state.input.author}
-              onChange={this.handleChange}
-              placeholder="Enter your full name"
-              id="author" /> 
-              <div className="text-danger">{this.state.errors.author}</div></div>
 
           <div className="form-group">
             <label for="short_description">Short Description:</label>
@@ -212,17 +146,9 @@ render(){
         </div>
         <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
       </div>
-      
-
-      
-      <div className="col-md-6 " style={{marginTop:"10px"}}>
-    
-		    {this.state.blogs.map(renderCard)}
-	 
- </div>
     </div>
 
   );
 }
 }
-export default HealthBlog;
+export default BlogCreation;
