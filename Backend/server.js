@@ -217,6 +217,30 @@ app.post('/api/blog_insertion', function(req, res) {
 });
 });
 
+
+
+app.post('/api/blog_feedback_update', function(req, res) {
+    var ObjectID =require('mongodb').ObjectID;
+    if(req.session.loggedin)	req.session.destroy();
+
+    var query ={ "_id" : ObjectID(req.body._id) };
+    const update ={$set: {"status":"pending_for_review","blog_to_post":req.body.blog_to_post}};
+    const options = { "upsert": false };
+    
+    connection(function(err,db2){
+        var dbo = db2.db("HealthScrollDB");
+       dbo.collection("blog_records").updateOne(query, update, options)
+        .then(result => {
+          const { matchedCount, modifiedCount } = result;
+          console.log(`Successfully matched ${matchedCount} and modified ${modifiedCount} items.`);
+          res.send(result);
+        });
+        db2.close();
+    });
+
+});
+
+
 app.get('/api/blog_retrieval/:status', function(req, res) {
 	
     connection(function(err,db2){
