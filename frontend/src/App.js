@@ -53,9 +53,13 @@ handleLogin(data){
          
           
 	<Router> 
-  <Navbar loggedInStatus ={this.state.loggedInStatus} />
+  <Navbar loggedInStatus ={this.state.loggedInStatus}/>
       <Switch>
-        <Route path='/blogCreation' component={BlogCreation} />
+      <Route exact path={"/blogCreation"}
+        render= {props => (
+          <BlogCreation {...props} loggedInStatus={this.state.loggedInStatus} user_details={this.state.user} />
+        )	}/>
+
         <Route path='/NewsSection' component={NewsComponent} />
         <Route path='/MedicineSearch' component={Search} />
         <Route path='/login' component={login} />
