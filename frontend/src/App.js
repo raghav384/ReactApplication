@@ -11,6 +11,7 @@ import HealthBlog from './components/HealthBlog/HealthBlog';
 import Home from './components/pages/Home';
 import Footer from './components/Footer'
 import Admin from './components/Admin/Admin';
+import userView from './components/HealthBlog/userBlogView';
 class App extends React.Component {
 	render() {
 		return (
@@ -40,6 +41,7 @@ class App extends React.Component {
         <Route path='/SignUp' component={Signup} />
         <Route path='/redirect/:id' component={Redirect} />
         <Route path='/Admin' component={Admin} />
+        <Route path='/userView' component={userView} />
       	<Route path='/' exact component={Home} />		
 
       </Switch>
