@@ -160,7 +160,7 @@ getRejected = () =>{
         })
 }
 getPending = () =>{
-    axios.get('http://localhost:8000/api/blog_retrieval/pending').then(res=>{
+    axios.get('http://localhost:8000/api/blog_retrieval/pending_for_review').then(res=>{
         console.log(res.data);
         this.setState({blogs:res.data,
             input: {},
@@ -172,7 +172,7 @@ getPending = () =>{
         })
 }
 getFeedback = () =>{
-    axios.get('http://localhost:8000/api/blog_retrieval/feedback').then(res=>{
+    axios.get('http://localhost:8000/api/blog_retrieval/feedback_received').then(res=>{
         console.log(res.data);
         this.setState({blogs:res.data,
             input: {},
@@ -262,7 +262,7 @@ render(){
                 id="short_description" /> 
                 <div className="text-danger">{this.state.errors.short_description}</div>
           </div>
-          {this.state.status=="feedback"?
+          {this.state.status=="feedback_received"?
           <div className="form-group">
             <label for="Feedback">Feedback:</label>
               <input className="form-control" 
@@ -282,7 +282,7 @@ render(){
         />
         
         <br></br><br></br><br></br><br></br><br></br>
-        {this.state.status=="feedback"?
+        {this.state.status=="feedback_received"?
         <input type="submit" value="Submit" className="btn btn-success"></input>:null}
         </form>
         </div>
