@@ -11,7 +11,7 @@ import BlogCreation from './components/HealthBlog/BlogCreation';
 import Home from './components/pages/Home';
 import Footer from './components/Footer'
 import Admin from './components/Admin/Admin';
-import userView from './components/HealthBlog/userBlogView';
+import UserView from './components/HealthBlog/userBlogView';
 import LoginSignup from './components/Authentication/LoginSignup';
 import BlogDisplay from './components/HealthBlog/BlogDisplay';
 import MetricsDashboard from './components/Admin/MetricsDashboard';
@@ -72,7 +72,10 @@ handleLogin(data){
         <Route path='/redirect/:id' component={Redirect} />
         <Route path='/blogDisplay'component={BlogDisplay} />
         <Route path='/Admin' component={Admin} />
-        <Route path='/userView' component={userView} />
+        <Route path='/userView'
+          render={props => (
+            <UserView {...props} user_details ={this.state.user}/>
+          )}/>
       	<Route exact path={"/"}
         render= {props => (
           <Home {...props} loggedInStatus={this.state.loggedInStatus} />
