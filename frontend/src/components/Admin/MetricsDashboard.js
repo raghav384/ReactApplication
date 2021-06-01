@@ -161,7 +161,7 @@ class MetricDashboard extends React.Component {
             <div className="container" >
                 <div className="col-lg-6" >
 
-                    <div style={{ margin: "0 auto", width: "575px", height: "600px", padding: "20px", marginTop: "10px" }} >
+                    <div style={{ margin: "0 auto", width: "575px", height: "600px", padding: "20px", marginTop: "10px",marginLeft:'300px' }} >
 
                         <div className="row" style={{ height: "300px", backgroundColor: "whitesmoke" }}>
                             <div className="row"  >
