@@ -1,0 +1,20 @@
+.box-1{
+    padding: 10px;
+    }
+    
+    .grid-2{
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: auto;
+        row-gap: 10px;
+      }
+      
+    .grid-2 > div {
+        background-color: rgb(255,255,255);
+        font-size: 15px;
+    }
+    .card-horizontal {
+        display: flex;
+        flex: 1 1 auto;
+      }
+    

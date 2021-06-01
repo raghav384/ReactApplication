@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import './blogCard.css'
 class BlogDisplay extends React.Component {
   constructor() {
     super();
@@ -49,9 +49,8 @@ render(){
 
   return (
     <div className="container">
-        <div className="col-md-6 " style={{marginTop:"20px",marginBottom:"100px"}}>
-    
-		    {this.state.blogs.map(renderCard)}
+        <div className="grid-1" style={{marginTop:"20px",marginBottom:"100px",marginLeft:"250px"}}>
+        {this.state.blogs.map(renderCard)}
         <br></br><br></br><br></br><br></br><br></br>
 	 
  </div>

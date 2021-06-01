@@ -134,15 +134,19 @@ class BlogApproval extends React.Component {
         const renderCard = (card, index) => {
             return (
                 <div class="card" style={{ width: '500px' }}>
-                    <div class="card-body" style={{ width: '500px', height: '50px' }}>
-                        <h4 class="card-title">{card.blog_to_post.title}</h4>
-                    </div>
-                    <div className="container">
-                        <div className="col-sm-6"><Button style={{ width: "80px" }} variant="success" onClick={() => this.ViewCardData(card)} >View</Button></div>
-                        <br></br><br></br>
-                    </div>
-                </div>
+          <div class="card-body" style={{ width: '500px', height: '60px' }}>
+            <div className="row"  >
+              <div className="col-md-8">
+                <h4 ><span style={{textDecoration:"underline"}}>Title</span> &nbsp; {card.blog_to_post.title}</h4>
+                <h5><span style={{textDecoration:"underline"}}>Author</span>  &nbsp; {card.blog_to_post.author} </h5>
+              </div>
+              <div className="col-md-4">
+                <Button style={{ width: "80px", marginLeft: '50px', marginTop: '15px' }} variant="success" onClick={() => this.ViewCardData(card)} >View</Button>
+              </div>
+            </div>
+          </div>
 
+        </div>
             );
         };
 
@@ -151,11 +155,10 @@ class BlogApproval extends React.Component {
         return (
             <div className="container" style={{ height: '500px' }}>
       
-                <div className="col-lg-6 " style={{ marginTop: "40px" }}>
+                <div className="col-lg-6 grid-2" style={{ marginTop: "40px" }}>
                 {this.state.blogs.length>0? 
-                <Button size="lg" variant="info" style={{marginLeft:'85px'}} disabled>Pending Blogs for Approval</Button>
+                <Button size="lg" variant="info" style={{marginLeft:'85px',width:'200px'}} disabled>Pending Blogs for Approval</Button>
                 :null}
-                <br></br>
                 
                     {this.state.blogs.map(renderCard)}
 
@@ -168,7 +171,7 @@ class BlogApproval extends React.Component {
                             margin: "0 auto", width: "450px", padding: "20px",
                             background: "#f9f9f9",
                             border: "2px solid #333",
-                            marginTop: "67px"
+                            marginTop: "78px"
                         }} >
                             <form>
                                 <br></br>

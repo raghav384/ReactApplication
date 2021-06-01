@@ -96,7 +96,7 @@ render(){
        <div style={{margin:"0 auto",  width:"500px", padding:"20px",
        background:"#f9f9f9",
         border:"2px solid #333",
-        marginTop:"20px"}} >
+        marginTop:"20px",marginLeft:'350px'}} >
         <form onSubmit={this.handleSubmit}>
         <br></br>
         <br></br>

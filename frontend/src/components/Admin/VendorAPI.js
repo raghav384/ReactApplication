@@ -100,16 +100,10 @@ validate(){
 render(){
   return (
     <div className="container" >
-      <div className="col-lg-6" >
       
-       <div style={{margin:"0 auto",  width:"575px",height:"800px", padding:"20px",marginTop:"10px",marginLeft:'300px'}} >
-
-       
-        <div className="row" style={{height:"500px",backgroundColor:"whitesmoke"}}>
-            
-            <h2 style={{textAlign:"center",marginLeft:"150px",marginTop:"10px",textDecoration:"underline"}}> Vendor API Management Console </h2>
-            <br></br>
-            <form onSubmit={this.handleSubmit} style={{marginRight:"40px",marginLeft:"100px",marginTop:"10px",fontSize:"10px"}}>
+       <div style={{marginBottom:'40px',width:"575px",height:"450px", padding:"20px",marginTop:"40px",marginLeft:'300px',backgroundColor:'whitesmoke'}} >      
+            <h2 style={{textAlign:"center",marginLeft:"10px",marginTop:"10px",textDecoration:"underline"}}> Vendor API Management Console </h2>
+            <form onSubmit={this.handleSubmit} style={{marginLeft:"50px",marginRight:'40px',marginTop:"40px",fontSize:"15px"}}>
        
         <div className="form-group">
          <label for="vendor_name">Vendor Name: </label> 
@@ -119,7 +113,7 @@ render(){
               value = {this.state.input.vendor_name}
               placeholder="Enter Vendor Name"
               onChange={this.handleChange}
-              id="vendor_name" style={{width:"340px"}}/>
+              id="vendor_name"/>
               <div className="text-danger">{this.state.errors.vendor_name}</div>
               
               </div>    
@@ -166,12 +160,7 @@ render(){
           </div>
         <input type="submit" onClick ={this.onSubmit}  value="Submit" className="btn btn-success"></input>
         </form>            
-        </div>        
-      </div>
-      </div>
-
-      
-      
+        </div>              
     </div>
 
   );
