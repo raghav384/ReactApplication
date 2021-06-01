@@ -14,6 +14,9 @@ import Admin from './components/Admin/Admin';
 import userView from './components/HealthBlog/userBlogView';
 import LoginSignup from './components/Authentication/LoginSignup';
 import BlogDisplay from './components/HealthBlog/BlogDisplay';
+import MetricsDashboard from './components/Admin/MetricsDashboard';
+import BlogApproval from './components/Admin/BlogApproval';
+import VendorAPI from './components/Admin/VendorAPI';
 
 class App extends React.Component {
 
@@ -55,7 +58,7 @@ handleLogin(data){
          
           
 	<Router> 
-  <Navbar loggedInStatus ={this.state.loggedInStatus}/>
+  <Navbar loggedInStatus ={this.state.loggedInStatus} user_details={this.state.user}/>
       <Switch>
       <Route exact path={"/blogCreation"}
         render= {props => (
@@ -78,6 +81,11 @@ handleLogin(data){
         path={"/loginSignup"}
         render={props =>(
         <LoginSignup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />) }/>
+      
+      <Route path='/blogApproval' component={BlogApproval} />
+        <Route path='/metricsDashboard'component={MetricsDashboard} />
+        <Route path='/vendorAPI' component={VendorAPI} />
+      
       </Switch>
       <Footer />
     </Router>
