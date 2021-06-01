@@ -202,7 +202,7 @@ app.post('/api/register_website_user', function(req, res) {
 app.post('/api/blog_insertion', function(req, res) {
 	if(req.session.loggedin)	req.session.destroy();
     var blog_details = req.body;
-    blog_details["status"] = "pending";
+    blog_details["status"] = "pending_for_review";
     console.log(blog_details);
 
     connection(function(err,db2){
@@ -224,7 +224,7 @@ app.post('/api/blog_feedback_update', function(req, res) {
     if(req.session.loggedin)	req.session.destroy();
 
     var query ={ "_id" : ObjectID(req.body._id) };
-    const update ={$set: {"status":"pending","blog_to_post":req.body.blog_to_post}};
+    const update ={$set: {"status":"pending_for_review","blog_to_post":req.body.blog_to_post}};
     const options = { "upsert": false };
     
     connection(function(err,db2){
