@@ -217,7 +217,7 @@ class userBlogView extends React.Component {
             <div className="row"  >
               <div className="col-md-8">
                 <h4 ><span style={{textDecoration:"underline"}}>Title</span> &nbsp; {card.blog_to_post.title}</h4>
-                <h5><span style={{textDecoration:"underline"}}>Date</span>  &nbsp; {card.blog_to_post.date} </h5>
+                <h5><span style={{textDecoration:"underline"}}>Date</span>  &nbsp; {card.blog_to_post.date.toString()} </h5>
               </div>
               <div className="col-md-4">
                 <Button style={{ width: "80px", marginLeft: '50px', marginTop: '15px' }} variant="success" onClick={() => this.ViewCardData(card)} >View</Button>
@@ -244,7 +244,7 @@ class userBlogView extends React.Component {
 
         <div className="col-lg-6 grid-2" style={{ marginTop: "40px" }}>
           {this.state.blogs.length > 0 ?
-            <Button size="lg" variant="info" style={{ marginLeft: '85px', width: '100px' }}>{this.state.currentStatus} </Button>
+            <Button size="lg" variant="info" style={{ marginLeft: '85px', width: '150px' }}>{this.state.currentStatus} </Button>
             : null}
           {this.state.blogs.map(renderCard)}
 
