@@ -53,8 +53,9 @@ responseFacebook = (response) => {
     }
   
 responseGoogle = (response) => {
-      axios.post('http://localhost:8000/api/register_user/google_login',response).then((res)=>{
-     });
+      console.log(response);
+      /*axios.post('http://localhost:8000/api/register_user/google_login',response).then((res)=>{
+     });*/
   }
 
 render(){
@@ -79,20 +80,7 @@ render(){
           </Form>  
         <div> 
           <br></br> 
-        <FacebookLogin 
-        appId="3825163174199146" //APP ID NOT CREATED YET
-        fields="name,email,picture"
-        callback={this.responseFacebook}
-        cssClass="loginBtn loginBtn--facebook"
-        />
-        
-        <GoogleLogin
-        clientId="644415206269-8dtrmg5l216aueioc1sl64euocbls8ru.apps.googleusercontent.com" //CLIENTID NOT CREATED YET
-        buttonText="LOGIN WITH GOOGLE"
-        onSuccess={this.responseGoogle}
-        onFailure={this.responseGoogle}
-        cssClass="loginBtn loginBtn--google"
-      />
+       
         </div>
         <div>
       </div>

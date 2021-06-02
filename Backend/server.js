@@ -419,6 +419,7 @@ app.get('/api/blog_count/:status', function(req, res) {
 app.post('/api/vendor_details_insertion', function(req, res) {
 	if(req.session.loggedin)	req.session.destroy();
     var vendor_details = req.body;
+    vendor_details["status"]= "pending_for_insertion"
     console.log(vendor_details);    
 
     connection(function(err,db2){
