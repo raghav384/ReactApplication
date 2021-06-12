@@ -40,7 +40,7 @@ export default class Navbar1 extends Component{
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           
           <NavLink to='/loginSignup' activeStyle  style = {{fontSize: "20px" }}>
-            <i class="fa fa-sign-in" aria-hidden="true"></i> &nbsp;&nbsp;Login
+            <i class="fa fa-sign-in" aria-hidden="true"></i> &nbsp;&nbsp;Login/Signup
           </NavLink>
           
         </NavMenu>
